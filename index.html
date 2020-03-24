@@ -1,0 +1,257 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Second Look</title>
+
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+  <div class="row" id="header-row">
+    <div class="col-md-12">
+      <h1>Second Look: gender and sentiment <em>on view</em> at the Harvard Art Museums </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h3>
+        The Harvard Art Museums collection spans approximately 250,000 objects that range from antiquity to the present time. Yet only 1,803 objects are on exhibit at the Museums at any given time. Interestingly though, while humans only see 1% of the collection, AI has seen it all. This is due to the Harvard Art Museums employing several commercial AI services to “view” and annotate the museums’ digitally archived collection. As a data visualization system, Second Look utilizes one of these services, AWS Rekognition, to analyze the gender and sentiment of faces in paintings found within the digital archive. By observing how AI infers gender and sentiment in paintings in relationship to metadata about the paintings’ color and chronology, we are able to attain new views of the collection. In particular, we are able to observe how gender is represented by artists through time, appropriated by museums, and understood by AI.
+      </h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>What are the most frequent sentiments identified by AI for the given selection of portraits?</h2>
+    </div>
+  </div>
+
+  <div class="row chart radio-menu">
+    <div class="col-md-1"></div>
+    <div class="col-md-11" >
+      <label class="title"><strong>Filter by gender:</strong>
+        <form>
+          <label class="radio all"><input type="radio" name="gender" value="all" checked> All</label>
+          <label class="radio female gen"><input type="radio" name="gender" value="female"> Female</label>
+          <label class="radio male gen"><input type="radio" name="gender" value="male"> Male</label>
+        </form>
+      </label>
+      <label class="title"><strong>Filter by sentiment:</strong>
+        <form>
+          <label class="radio all_sent"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
+          <label class="radio HAPPY sent"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
+          <label class="radio SAD sent"><input type="radio" name="sentiment" value="SAD"> Sad</label>
+          <label class="radio CALM sent"><input type="radio" name="sentiment" value="CALM"> Calm</label>
+          <label class="radio ANGRY sent"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
+          <label class="radio DISGUSTED sent"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
+          <label class="radio CONFUSED sent"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
+          <label class="radio SURPRISED sent"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
+        </form>
+      </label>
+    </div>
+  </div>
+
+    <div class="row chart">
+      <div class="col-md-1">
+        <div class = "sentColLegend" class = "chart"></div>
+      </div>
+      <div class="col-md-7" >
+        <div id="sentimentVisPack" class = "chart"></div>
+        <span class="note"><em>Circle sizes are relative to AI's confidence that the painting portrays the given sentiment.</em></span>
+      </div>
+      <div class = "col-md-3">
+          <table id = "art-object-details">
+            <tbody>
+            <tr>
+              <td class = "rCol" id = "title" class="title"></td>
+            </tr>
+            <tr>
+              <td class = "rCol" id = "artist"></td>
+            </tr>
+            <tr>
+              <td class = "rCol" id = "century"><strong>Hover over circles <br> to view paintings</strong></td>
+            </tr>
+            <tr>
+              <td class = "rCol" id = "emotion"></td>
+            </tr>
+            <tr>
+              <td class = "rCol" id = "confidence"></td>
+            </tr>
+            </tbody>
+          </table>
+        <img id = "hover-img" src="img/hamlogo.png"></img>
+      </div>
+    </div>
+
+  <h3>
+    (FILLER TEXT) The Harvard Art Museums collection spans approximately 250,000 objects that range from antiquity to the present time. Yet only 1,803 objects are on exhibit at the Museums at any given time. Interestingly though, while humans only see 1% of the collection, AI has seen it all. This is due to the Harvard Art Museums employing several commercial AI services to “view” and annotate the museums’ digitally archived collection. As a data visualization system, Second Look utilizes one of these services, AWS Rekognition, to analyze the gender and sentiment of faces in paintings found within the digital archive. By observing how AI infers gender and sentiment in paintings in relationship to metadata about the paintings’ color and chronology, we are able to attain new views of the collection. In particular, we are able to observe how gender is represented by artists through time, appropriated by museums, and understood by AI.
+  </h3>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>How confident is AI in its sentiment analysis of these paintings?</h2>
+    </div>
+  </div>
+
+  <div class="row chart radio-menu">
+    <div class="col-md-1"></div>
+    <div class="col-md-11" >
+      <label class="title"><strong>Filter by gender:</strong>
+        <form>
+          <label class="radio all"><input type="radio" name="gender" value="all" checked> All</label>
+          <label class="radio female gen"><input type="radio" name="gender" value="female"> Female</label>
+          <label class="radio male gen"><input type="radio" name="gender" value="male"> Male</label>
+        </form>
+      </label>
+      <label class="title"><strong>Filter by sentiment:</strong>
+        <form>
+          <label class="radio all_sent"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
+          <label class="radio HAPPY sent"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
+          <label class="radio SAD sent"><input type="radio" name="sentiment" value="SAD"> Sad</label>
+          <label class="radio CALM sent"><input type="radio" name="sentiment" value="CALM"> Calm</label>
+          <label class="radio ANGRY sent"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
+          <label class="radio DISGUSTED sent"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
+          <label class="radio CONFUSED sent"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
+          <label class="radio SURPRISED sent"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
+        </form>
+      </label>
+    </div>
+  </div>
+
+    <div class="row chart">
+      <div class="col-md-1">
+        <div class = "sentColLegend" class = "chart"></div>
+      </div>
+      <div class="col-md-11">
+        <div id="sentimentVisConcentric" class = "chart"></div>
+        <span class="note"><em>Circle sizes are relative to AI's confidence that the painting portrays the given sentiment.</em></span>
+      </div>
+    </div>
+
+  <h3>
+    (FILLER TEXT) The Harvard Art Museums collection spans approximately 250,000 objects that range from antiquity to the present time. Yet only 1,803 objects are on exhibit at the Museums at any given time. Interestingly though, while humans only see 1% of the collection, AI has seen it all. This is due to the Harvard Art Museums employing several commercial AI services to “view” and annotate the museums’ digitally archived collection. As a data visualization system, Second Look utilizes one of these services, AWS Rekognition, to analyze the gender and sentiment of faces in paintings found within the digital archive. By observing how AI infers gender and sentiment in paintings in relationship to metadata about the paintings’ color and chronology, we are able to attain new views of the collection. In particular, we are able to observe how gender is represented by artists through time, appropriated by museums, and understood by AI.
+  </h3>
+
+  <div class="row">
+    <div class="col-md-12">
+      <h2>What are the most frequent colors for specific genders and sentiments?</h2>
+    </div>
+  </div>
+
+  <div class="row chart radio-menu">
+    <div class="col-md-1"></div>
+    <div class="col-md-8" >
+      <label class="title"><strong>Filter by gender:</strong>
+        <form>
+          <label class="radio all"><input type="radio" name="gender" value="all" checked> All</label>
+          <label class="radio female gen"><input type="radio" name="gender" value="female"> Female</label>
+          <label class="radio male gen"><input type="radio" name="gender" value="male"> Male</label>
+        </form>
+      </label>
+      <label class="title"><strong>View by color families or discrete colors:</strong>
+        <form>
+          <label class="radio hex"><input type="radio" name="color" value="hex" checked> Color</label>
+          <label class="radio hue"><input type="radio" name="color" value="hue"> Hue</label>
+        </form>
+      </label>
+      <br>
+      <label class="title"><strong>Filter by sentiment:</strong>
+        <form>
+          <label class="radio all_sent"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
+          <label class="radio HAPPY sent"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
+          <label class="radio SAD sent"><input type="radio" name="sentiment" value="SAD"> Sad</label>
+          <label class="radio CALM sent"><input type="radio" name="sentiment" value="CALM"> Calm</label>
+          <label class="radio ANGRY sent"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
+          <label class="radio DISGUSTED sent"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
+          <label class="radio CONFUSED sent"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
+          <label class="radio SURPRISED sent"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
+        </form>
+      </label>
+    </div>
+    <div class="col-md-2">
+      <div id="colorVisWheel" class = "chart"></div>
+    </div>
+  </div>
+
+  <div class="row chart">
+    <div class="col-md-12">
+      <div id="colorVisBlock" class = "chart">
+        <label class="title" id="mosaic-message-0"></label>
+      </div>
+      <div id="colorVisMosaic" class = "chart">
+        <label class="title" id="mosaic-message-1"></label>
+      </div>
+      </div>
+    </div>
+
+  <h3>
+    (FILLER TEXT) The Harvard Art Museums collection spans approximately 250,000 objects that range from antiquity to the present time. Yet only 1,803 objects are on exhibit at the Museums at any given time. Interestingly though, while humans only see 1% of the collection, AI has seen it all. This is due to the Harvard Art Museums employing several commercial AI services to “view” and annotate the museums’ digitally archived collection. As a data visualization system, Second Look utilizes one of these services, AWS Rekognition, to analyze the gender and sentiment of faces in paintings found within the digital archive. By observing how AI infers gender and sentiment in paintings in relationship to metadata about the paintings’ color and chronology, we are able to attain new views of the collection. In particular, we are able to observe how gender is represented by artists through time, appropriated by museums, and understood by AI.
+  </h3>
+
+
+<!--  <div class="row">-->
+<!--    <div class="col-md-12">-->
+<!--      <h3>What kinds of faces are the most/least seen at the museums?</h3>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div id="activity-chart" class = "chart">-->
+<!--    <h2>Activity Chart</h2>-->
+<!--  </div>-->
+
+<!--  <div class="row">-->
+<!--    <div class="col-md-12">-->
+<!--      <p>-->
+<!--        Playing off the theme of AI and curatorial practice, we hope to use our revelations to then ask, how might we surface some of the underutilized pieces — ones that people almost never get to see? For example, given a human-curated collection, how might an AI curate a similar selected exhibition or how might it extend the exhibition further by using underutilized pieces? And in the same vein, how might we filter for dissimilarity when extending our hypothetical exhibition so that outlier faces are illuminated?-->
+<!--      </p>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div class="row">-->
+<!--    <div class="col-md-12">-->
+<!--      <h3>How might an AI extend a human-curated exhibition by using similar and dissimilar pieces that are underutilized?</h3>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--  <div id="network-chart" class = "chart">-->
+<!--    <h2>Network Chart</h2>-->
+<!--  </div>-->
+
+<!--  <div class="row">-->
+<!--    <div class="col-md-12">-->
+<!--      <h3>-->
+<!--        Through choosing to explore the domain of faces in this project, we also hope to raise questions about the ethics of algorithmic facial analysis. Can AI accurately infer the emotional interiority of people? What are the implications for AI misinterpreting people’s emotional states or those portrayed in artworks?-->
+<!--      </h3>-->
+<!--    </div>-->
+<!--  </div>-->
+
+<!--</div>-->
+
+<!-- Load JS libraries -->
+<script src="js/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/d3.min.js"></script>
+<script src="js/d3-legend.min.js"></script>
+<script src="js/d3-tip.js"></script>
+
+<script src="js/sentimentVisPack.js"></script>
+<script src="js/sentimentVisConcentric.js"></script>
+<script src="js/colorVisWheel.js"></script>
+<script src="js/colorVisBlock.js"></script>
+<script src="js/colorMosaic.js"></script>
+<script src="js/sentColLegend.js"></script>
+
+<script src="js/main.js"></script>
+</body>
+
+</html>

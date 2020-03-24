@@ -1,0 +1,128 @@
+body {
+  /*font-family: Verdana;*/
+  font-family: Suisse Regular,sans-serif;
+  color: #343a40;
+  text-align: center;
+}
+#header-row {
+  padding: 25px;
+  margin: 25px;
+}
+.chart, #art-object-details, #hover-img, label.title, .note {
+  /*border: 0.5px solid #E0E0E0;*/
+  padding: 15px;
+  margin: 15px;
+}
+.chart {
+  /*background: #F0F0F0;*/
+  padding: 10px 20px 10px 20px;
+  margin: 10px 55px 10px 55px;
+}
+.note {
+  padding: 10px 0px 10px 20px;
+  margin: 10px 0px 10px 55px;
+}
+#colorVisWheel {
+  margin: 5px;
+  padding: 5px;
+}
+#sentimentVisPack, #sentimentVisConcentric, #colorVisMosaic {
+  margin-bottom: 100px;
+}
+.radio {
+  display: inline;
+  position: relative;
+  padding-left: 10px;
+  cursor: pointer;
+  text-transform: lowercase;
+}
+/* Hide radio buttons for sentiment upon page load */
+.radio.sent {
+  display: none;
+}
+#art-object-details, .axes, .radio, .note, table, label, form {
+  font-size: 12px;
+}
+label, form {
+  text-align: left;
+  padding: 10px;
+}
+.title, table {
+  background: #F8F8F8;
+  padding: 5px;
+  letter-spacing: 0.06em;
+  border: 0;
+  border-radius: 8px;
+}
+.sentColLegend, label input {
+  letter-spacing: 0.06em;
+}
+#hover-img {
+  max-width: 100%;
+  height: auto;
+  position: center;
+}
+h1, h2, h3 {
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: black;
+  font-weight: 200;
+}
+h1 {
+  font-size: 50px;
+  margin: 25px 200px 5px 200px;
+}
+h2 {
+  margin: 50px 50px 10px 50px;
+  padding: 35px 15px 10px 15px;
+  font-size: 30px;
+}
+h3 {
+  margin: 35px 200px 35px 200px;
+  font-size: 16px;
+  text-align: justify;
+  line-height: 1.7;
+}
+/*.axesLabels {*/
+/*  fill: darkblue;*/
+/*  font-size: 11px;*/
+/*  text-transform: lowercase;*/
+/*}*/
+.axes path {
+  stroke: white;
+}
+.axes {
+  /*text-transform: lowercase;*/
+}
+.axes text {
+  fill: #343a40;
+}
+
+/*Table Styling*/
+table {
+  width: 100%;
+  height: 150px;
+}
+td {
+  text-align: center;
+  height: 10px;
+  padding: 5px;
+}
+
+/* Tooltips */
+
+.d3-tip {
+  position: absolute;
+  text-align: center;
+  font-size: 11px;
+  color: white;
+  width: 250px;
+  height: auto;
+  padding: 8px;
+  background: rgba(0, 0, 0, 0.65);
+  border: 0;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+
