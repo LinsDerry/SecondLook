@@ -33,7 +33,7 @@ function sentimentVisPack(data) {
         .attr("class", "cir")
         .on("mouseover", function(d) {
             if (d.children === undefined) {
-                var image = document.getElementById("hover-img");
+                var image = document.getElementById("hover-img-pack");
                 image.src = d.data.url;
                 document.getElementById("title").innerHTML =
                     "<strong>Title: </strong>" + d.data.title;

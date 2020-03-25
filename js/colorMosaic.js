@@ -1,6 +1,6 @@
 // SVG drawing area
 var marginMosaic = marginPack;
-var widthMosaic = widthConcentric;
+var widthMosaic = widthConcentric / 2;
 var heightMosaic = 400 - marginMosaic.top - marginMosaic.bottom;
 var svgMosaic = d3.select("#colorVisMosaic").append("svg")
     .attr("width", widthMosaic + marginMosaic.left + marginMosaic.right)
@@ -18,10 +18,105 @@ var yScaleMos = d3.scaleBand()
     .range([0, heightMosaic])
     .paddingInner(0);
 
+var hue = false;
+
 function colorMosaic(color, data) {
     console.log("vis cinq");
 
+    hue = isHue(color);
+
     data = setupData(color, data); // setupData also updates xScaleMos and yScaleMos domains
+
+    document.getElementById("colorVisMosaic").style.backgroundColor = color.color;
+
+    /* Call if using ALL colors in collection vs only prominent ones (see makeColors in main.js). Uncomment
+     label with id="mosaic-message-1" in index.html before calling. */
+    // updateHTML(color, data);
+
+    createMosaicDefs(data);
+    createWheelDefs(data);
+
+    // Create default look of color wheel
+    var currColors = data[0].colors;
+    var newColors = makeNewColors(currColors, color);
+    colorVisWheel(newColors, data[0]);
+
+    svgWheel.select("circle")
+        .style("fill", "url(#img_cir_" + 0 + ")");
+
+
+    var updateRect = svgMosaic.selectAll("rect").data(data);
+
+    var enterRect = updateRect.enter()
+        .append("rect")
+        .attr("class", "rec")
+        .on("mouseover", function(d, i) {
+            var currColors = d.colors;
+            var newColors = makeNewColors(currColors, color);
+            colorVisWheel(newColors, d);
+
+            var index = i;
+            svgWheel.select("circle")
+                .style("fill", function () {
+                    return "url(#img_cir_" + index + ")";
+                });
+        })
+        .on("mouseout", function () {
+            svgWheel.selectAll(".arc").remove();
+            svgWheel.selectAll("circle").remove();
+        });
+
+    enterRect.merge(updateRect)
+        .attr("x", function (d) {
+            return xScaleMos(d.col);
+        })
+        .attr("y",function (d) {
+            return yScaleMos(d.row);
+        })
+        .attr("width", function (d) {
+            return xScaleMos.bandwidth(d.col);
+        })
+        .attr("height", function (d) {
+            return yScaleMos.bandwidth(d.row);
+        })
+        .style("fill", function (d, i) {
+            return "url(#img_" + i + ")";
+        });
+
+    updateRect.exit().remove();
+
+}
+
+/* Returns a filtered and sorted array of art objects whose most prominent hue/hex is color and
+ the art objects with the highest percentage of color come first; adds new fields and
+ values for row and column placement as well as updates xScaleMos and yScaleMos domains for
+ constructing the mosaic via helper function, setupMosaic.
+ */
+function setupData (color, data) {
+
+    // Filter data to include only art objects whose most prominent hue/hex is color
+    if (hue) {
+        data = data.filter(function (d) {
+            return d.colors[0].hue === color.color;
+        });
+    }
+
+    if (!hue) {
+        data = data.filter(function (d) {
+            return d.colors[0].color === color.color;
+        });
+    }
+
+    // Sort data so that art objects with the highest percentage of color are first
+    data.sort(function (a, b) {
+        return b.colors[0].percent - a.colors[0].percent;
+    });
+
+    return setupMosaic(data);
+}
+
+/* updateHTML updates labels and div color for mosaic viz. */
+function updateHTML(color, data) {
 
     document.getElementById("colorVisMosaic").style.backgroundColor = color.color;
 
@@ -43,94 +138,6 @@ function colorMosaic(color, data) {
         element.style.backgroundColor = color.color;
         element.style.border = "none";
     }
-
-
-    svgMosaic.selectAll("defs").remove();
-
-    var defs = svgMosaic.append("defs");
-
-    var patterns = defs.selectAll("pattern")
-        .data(data)
-        .enter()
-        .append("pattern")
-        .attr("id", function (d, i) {
-            return "img_" + i;
-        })
-        .attr("width", function (d) {
-            return xScaleMos.bandwidth(d.col);
-        })
-        .attr("height", function (d) {
-            return yScaleMos.bandwidth(d.row);
-        })
-        .attr("patternUnits", "userSpaceOnUse");
-
-    var images = patterns.append("svg:image")
-        .attr("xlink:href", function (d) {
-            return d.primaryimageurl;
-        })
-        .attr("x", 0)
-        .attr("y",0)
-        .attr("width", function (d) {
-            return xScaleMos.bandwidth(d.col);
-        })
-        .attr("height", function (d) {
-            return yScaleMos.bandwidth(d.row) *0.8;
-        });
-
-    var updateRect = svgMosaic.selectAll("rect").data(data);
-
-    var enterRect = updateRect.enter()
-        .append("rect")
-        .attr("class", "rec");
-
-    enterRect.merge(updateRect)
-        .attr("x", function (d) {
-            return xScaleMos(d.col);
-        })
-        .attr("y",function (d) {
-            return yScaleMos(d.row);
-        })
-        .attr("width", function (d) {
-            return xScaleMos.bandwidth(d.col);
-        })
-        .attr("height", function (d) {
-            return yScaleMos.bandwidth(d.row);
-        })
-        .style("fill", function (d, i) {
-            return "url(#img_" + i + ")";
-        });
-        // .style("stroke", color.color)
-        // .style("stroke-width", 0.33);
-
-    updateRect.exit().remove();
-}
-
-/* Returns a filtered and sorted array of art objects whose most prominent hue/hex is color and
- the art objects with the highest percentage of color come first; adds new fields and
- values for row and column placement as well as updates xScaleMos and yScaleMos domains for
- constructing the mosaic via helper function, setupMosaic.
- */
-function setupData (color, data) {
-
-    // Filter data to include only art objects whose most prominent hue/hex is color
-    if (isHue(color)) {
-        data = data.filter(function (d) {
-            return d.colors[0].hue === color.color;
-        });
-    }
-
-    if (!isHue(color)) {
-        data = data.filter(function (d) {
-            return d.colors[0].color === color.color;
-        });
-    }
-
-    // Sort data so that art objects with the highest percentage of color are first
-    data.sort(function (a, b) {
-        return b.colors[0].percent - a.colors[0].percent;
-    });
-
-    return setupMosaic(data);
 }
 
 /* setupMosaic assigns row and col values to each art object and updates the x and y scales according to
@@ -181,4 +188,111 @@ function setupMosaic(data) {
 /* Returns a boolean for whether or not the color is a hue value */
 function isHue(color) {
     return color.color[0] !== '#';
+}
+
+/* createMosaicDefs and createWheelDefs creats two sets of pattern-images using the primaryimageurl's in data.
+* the Mosaic defs are sized to fill the mosaic rectangles and the wheel defs, to fill the color wheel or donut chart. */
+function createMosaicDefs(data) {
+    svgMosaic.selectAll("defs").remove();
+
+    var defs = svgMosaic.append("defs");
+
+    var patterns = defs.selectAll("pattern")
+        .data(data)
+        .enter()
+        .append("pattern")
+        .attr("id", function (d, i) {
+            return "img_" + i;
+        })
+        .attr("width", function (d) {
+            return xScaleMos.bandwidth(d.col);
+        })
+        .attr("height", function (d) {
+            return yScaleMos.bandwidth(d.row);
+        })
+        .attr("patternUnits", "userSpaceOnUse");
+
+    var images = patterns.append("svg:image")
+        .attr("xlink:href", function (d) {
+            return d.primaryimageurl;
+        })
+        .attr("x", 0)
+        .attr("y",0)
+        .attr("width", function (d) {
+            return xScaleMos.bandwidth(d.col) * 0.8;
+        })
+        .attr("height", function (d) {
+            return yScaleMos.bandwidth(d.row) *0.8;
+        });
+}
+
+function createWheelDefs(data) {
+
+    svgWheel.selectAll("defs").remove();
+
+    var defs = svgWheel.append("defs");
+
+    var patterns = defs.selectAll("pattern")
+        .data(data)
+        .enter()
+        .append("pattern")
+        .attr("id", function (d, i) {
+            return "img_cir_" + i;
+        })
+        .attr("width", function (d) {
+            return widthWheel;
+        })
+        .attr("height", function (d) {
+            return heightWheel;
+        })
+        .attr("patternUnits", "userSpaceOnUse");
+
+    var images = patterns.append("svg:image")
+        .attr("xlink:href", function (d) {
+            return d.primaryimageurl;
+        })
+        .attr("x", 0)
+        .attr("y",0)
+        .attr("width", function (d) {
+            return widthWheel;
+        })
+        .attr("height", function (d) {
+            return heightWheel;
+        });
+}
+
+/* makeNewColors prepares an array of objects formatted for passing to colorVisWheel. */
+function makeNewColors(currColors) {
+    var newColors = [];
+
+    for (var i = 0; i < currColors.length; i++) {
+        var obj = {};
+        if (hue) {
+            if (newColors.length > 0) {
+                var found = false;
+                newColors.forEach(function (d) {
+                    if (d.color === currColors[i].hue) {
+                        d.frequency += currColors[i].percent;
+                        found = true;
+                    }
+                });
+                if (!found) {
+                    obj.color = currColors[i].hue;
+                    obj.frequency = currColors[i].percent;
+                    newColors.push(obj);
+                }
+            }
+            else {
+                obj.color = currColors[i].hue;
+                obj.frequency = currColors[i].percent;
+                newColors.push(obj);
+            }
+        }
+        if (!hue) {
+            obj.color = currColors[i].color;
+            obj.frequency = currColors[i].percent;
+            newColors.push(obj);
+        }
+    }
+    return newColors;
 }

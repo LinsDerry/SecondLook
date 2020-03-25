@@ -46,6 +46,16 @@ function colorVisBlock(colors, orderedColors, data) {
         .attr("height", height)
         .style("fill", function (d) {
             return d.color;
+        })
+        .style("stroke", function (d) {
+            if (d.color === "White" || d.color === "#FFFFFF") {
+                return "#343a40"
+            }
+        })
+        .style("stroke-width", function (d) {
+            if (d.color === "White" || d.color === "#FFFFFF") {
+                return "0.25"
+            }
         });
     updateRect.exit().remove();
 

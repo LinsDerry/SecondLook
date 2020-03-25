@@ -8,7 +8,7 @@ body {
   padding: 25px;
   margin: 25px;
 }
-.chart, #art-object-details, #hover-img, label.title, .note {
+.chart, #art-object-details, img, label.title, .note {
   /*border: 0.5px solid #E0E0E0;*/
   padding: 15px;
   margin: 15px;
@@ -19,15 +19,16 @@ body {
   margin: 10px 55px 10px 55px;
 }
 .note {
-  padding: 10px 0px 10px 20px;
-  margin: 10px 0px 10px 55px;
+  padding: 0px 0px 10px 20px;
+  margin: 0px 0px 10px 55px;
+}
+label.title {
+  padding: 10px;
+  margin: 5px;
 }
 #colorVisWheel {
   margin: 5px;
   padding: 5px;
-}
-#sentimentVisPack, #sentimentVisConcentric, #colorVisMosaic {
-  margin-bottom: 100px;
 }
 .radio {
   display: inline;
@@ -57,7 +58,7 @@ label, form {
 .sentColLegend, label input {
   letter-spacing: 0.06em;
 }
-#hover-img {
+img {
   max-width: 100%;
   height: auto;
   position: center;

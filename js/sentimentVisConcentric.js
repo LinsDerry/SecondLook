@@ -24,12 +24,12 @@ svgConcentric.append("g")
     .attr("transform", "translate(0," + (heightConcentric - marginConcentric.bottom) + ")");
 
 //Initialize tool-tip for interaction with circles
-var tip = d3.tip()
+var tipC = d3.tip()
     .attr("class", "d3-tip")
     .offset([-8, 0]);
 
 //Call tool-tip
-svgConcentric.call(tip);
+svgConcentric.call(tipC);
 
 function sentimentVisConcentric(data) {
     console.log("vis deux");
@@ -42,8 +42,8 @@ function sentimentVisConcentric(data) {
     var enterCir = updateCir.enter()
         .append("circle")
         .attr("class", "cir")
-        .on("mouseover", tip.show)
-        .on("mouseout", tip.hide);
+        .on("mouseover", tipC.show)
+        .on("mouseout", tipC.hide);
     enterCir.merge(updateCir)
         .transition()
         .duration(dur)
@@ -75,7 +75,7 @@ function sentimentVisConcentric(data) {
     //     });
 
     // Update tool-tip display information
-    tip.html(function(d) {
+    tipC.html(function(d) {
         if (sentimentsMap[d.emotion.Value] === 1) {
             return "<span class = tip> Of the " + data.length + " selected paintings, " + sentimentsMap[d.emotion.Value] +
                 " is predominantly seen as <span style='color:red'><strong>" + d.emotion.Value + "</strong></span> by AI." + "</span>";
@@ -84,6 +84,5 @@ function sentimentVisConcentric(data) {
             return "<span class = tip> Of the " + data.length + " selected paintings, " + sentimentsMap[d.emotion.Value] +
                 " are predominantly seen as <span style='color:red'><strong>" + d.emotion.Value + "</strong></span> by AI." + "</span>";
         }
-
     });
 }

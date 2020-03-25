@@ -54,9 +54,7 @@ d3.queue()
 
 /* setup instantiates global arrays and creates the default visualizations. */
 function setup(error, data1, data2) {
-    objectData = data1.filter(function (d) {
-        return d.colors.length >= 3; //Reduce number of black and white images
-    });
+    objectDataPopulate(data1);
     annotationData = data2;
     artObjects = createArtObjects(objectData, annotationData);
     sentColKey = sentimentColorKey();
@@ -66,12 +64,31 @@ function setup(error, data1, data2) {
     sentimentVisPack(artObjects);
     sentimentVisConcentric(artObjects);
     colorVisualizations("hex", artObjects);
-    // colorMosaic(orderedColorsHue[orderedColorsHue.length - 2], artObjects); // Default to "Brown" hue
-    colorMosaic(orderedColorsHex[orderedColorsHex.length - 23], artObjects); // Default to forest green color
+    colorMosaic(orderedColorsHex[orderedColorsHex.length - 13], artObjects);
     sentColLegend();
     sentRadio("all");
 
     updateVisualizations();
+}
+
+/* Populate objectData with color images of paintings only. Sadly, this may filter out pieces intentionally
+*  painted with only black, white, and grey hues. */
+function objectDataPopulate(data1) {
+    /* Filter out black and white images by testing that an image has a hue other than "Black", "White", and "Grey" */
+    data1.forEach(function (d) {
+        var include = false;
+        for (var i = 0; i < d.colors.length; i++) {
+            if (d.colors[i].hue === "Violet" || d.colors[i].hue === "Blue" || d.colors[i].hue === "Orange" ||
+                d.colors[i].hue === "Red" || d.colors[i].hue === "Yellow" || d.colors[i].hue === "Green" ||
+                d.colors[i].hue === "Brown") {
+                include = true;
+            }
+            if (include === true) {
+                objectData.push(d);
+                break;
+            }
+        }
+    });
 }
 
 /* createArtObjects returns an array of objects containing data from objectData and annotationData
@@ -211,27 +228,35 @@ function makeSentimentsMap(data) {
     return map;
 }
 
-/* makeColors returns an array of strings, specifically, the color (hex or hue based on second argument)
- values listed in each record's colors array. I am using an array and not a set bcs I want to count the
- recurrences and the array's length later on. This function accepts data as an argument which could
- potentially be the artObjects, female, or male arrays where d.color/d.hue could be navigated to as follows. */
-function makeColors(data, kind) {
+/* makeColors returns an array of strings, specifically, the color (hex or hue) values listed in each record's
+ colors array. I am using an array and not a set bcs I want to count the recurrences and the array's length later on.
+ This function accepts data as an argument which could potentially be the artObjects, female, or male arrays where
+ d.color/d.hue could be navigated to as follows. */
+function makeColors(data, kind, range) {
 
     var colors = [];
 
     if (kind === "hex") {
         data.forEach(function (record) {
-            record.colors.forEach(function (d) {
-                colors.push(d.color);
-            });
+            // ALL colors
+            // record.colors.forEach(function (d) {
+            //     colors.push(d.color);
+            // });
+
+            // Only prominent colors
+            colors.push(record.colors[0].color);
         });
     }
 
     if (kind === "hue") {
         data.forEach(function (record) {
-            record.colors.forEach(function (d) {
-                colors.push(d.hue);
-            });
+            // ALL hues
+            // record.colors.forEach(function (d) {
+            //     colors.push(d.hue);
+            // });
+
+            // Only prominent hues
+            colors.push(record.colors[0].hue);
         });
     }
 
@@ -287,15 +312,15 @@ function colorVisualizations(kind, data) {
         colorVisBlock(colorsHue, orderedColorsHue, data);
         document.getElementById("mosaic-message-0").innerHTML = "<strong>" +
             "Click on a hue to view paintings where that hue is most prominent:"
-        + "</strong>";
-        colorVisWheel(orderedColorsHue, data);
+            + "</strong>";
+        // colorVisWheel(orderedColorsHue, data);
     }
     if (kind === "hex") {
         colorVisBlock(colorsHex, orderedColorsHex, data);
         document.getElementById("mosaic-message-0").innerHTML = "<strong>" +
             "Click on a color to view paintings where that color is most prominent:"
-        + "</strong>";
-        colorVisWheel(orderedColorsHex, data);
+            + "</strong>";
+        // colorVisWheel(orderedColorsHex, data);
     }
 }
 
