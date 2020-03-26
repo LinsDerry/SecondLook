@@ -7,7 +7,7 @@ var svgWheel = d3.select("#colorVisWheel").append("svg")
     .attr("height", heightWheel + marginWheel.top + marginWheel.bottom)
     .append("g")
     .attr("class", "chart")
-    .attr("transform", "translate(" + marginWheel.left / 4 + "," + marginWheel.top + ")");
+    .attr("transform", "translate(" + marginWheel.left / 4 + ", 0)");
 
 function colorVisWheel(orderedColors, data) {
     console.log("vis trois");

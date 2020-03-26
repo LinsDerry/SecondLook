@@ -1,7 +1,7 @@
 // SVG drawing area
 var marginMosaic = marginPack;
 var widthMosaic = widthConcentric / 2;
-var heightMosaic = 400 - marginMosaic.top - marginMosaic.bottom;
+var heightMosaic = 540 - marginMosaic.top - marginMosaic.bottom;
 var svgMosaic = d3.select("#colorVisMosaic").append("svg")
     .attr("width", widthMosaic + marginMosaic.left + marginMosaic.right)
     .attr("height", heightMosaic + marginMosaic.top + marginMosaic.bottom)
@@ -44,6 +44,21 @@ function colorMosaic(color, data) {
     svgWheel.select("circle")
         .style("fill", "url(#img_cir_" + 0 + ")");
 
+    document.getElementById("title-2").innerHTML =
+        "<em>" + data[0].title + "</em>";
+    document.getElementById("artist-2").innerHTML =
+        "<strong>Artist: </strong>" + data[0].artist;
+    document.getElementById("century-2").innerHTML =
+        "<strong>Century: </strong>" + data[0].century;
+    document.getElementById("emotion-2").innerHTML =
+        "<strong>Dominant sentiment: </strong>" + data[0].emotion.Value.toLowerCase()
+        + " (" + Math.floor(data[0].emotion.Confidence) + "% confidence)";
+    document.getElementById("gender-2").innerHTML =
+        "<strong>Gender: </strong>" + data[0].gender.Value.toLowerCase()
+        + " (" + Math.floor(data[0].gender.Confidence) + "% confidence)";
+
+
+
 
     var updateRect = svgMosaic.selectAll("rect").data(data);
 
@@ -60,10 +75,23 @@ function colorMosaic(color, data) {
                 .style("fill", function () {
                     return "url(#img_cir_" + index + ")";
                 });
+
+            document.getElementById("title-2").innerHTML =
+                "<em>" + d.title + "</em>";
+            document.getElementById("artist-2").innerHTML =
+                "<strong>Artist: </strong>" + d.artist;
+            document.getElementById("century-2").innerHTML =
+                "<strong>Century: </strong>" + d.century;
+            document.getElementById("emotion-2").innerHTML =
+                "<strong>Dominant sentiment: </strong>" + d.emotion.Value.toLowerCase()
+                + " (" + Math.floor(d.emotion.Confidence) + "% confidence)";
+            document.getElementById("gender-2").innerHTML =
+                "<strong>Gender: </strong>" + d.gender.Value.toLowerCase()
+                + " (" + Math.floor(d.gender.Confidence) + "% confidence)";
         })
         .on("mouseout", function () {
-            svgWheel.selectAll(".arc").remove();
-            svgWheel.selectAll("circle").remove();
+            // svgWheel.selectAll(".arc").remove();
+            // svgWheel.selectAll("circle").remove();
         });
 
     enterRect.merge(updateRect)

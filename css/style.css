@@ -8,7 +8,7 @@ body {
   padding: 25px;
   margin: 25px;
 }
-.chart, #art-object-details, img, label.title, .note {
+.chart, .art-object-details, img, label.title, .note {
   /*border: 0.5px solid #E0E0E0;*/
   padding: 15px;
   margin: 15px;
@@ -51,17 +51,33 @@ label, form {
 .title, table {
   background: #F8F8F8;
   padding: 5px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
   border: 0;
   border-radius: 8px;
 }
 .sentColLegend, label input {
-  letter-spacing: 0.06em;
+  letter-spacing: 0.05em;
 }
 img {
   max-width: 100%;
   height: auto;
   position: center;
+}
+table {
+  width: 100%;
+  /*height: 150px;*/
+}
+td {
+  text-align: center;
+  height: 100%;
+  padding: 3px;
+}
+#title, #title-2 {
+  font-weight: 600;
+  padding-top: 8px;
+}
+#gender, #gender-2 {
+  padding-bottom: 8px;
 }
 h1, h2, h3 {
   text-align: center;
@@ -97,17 +113,6 @@ h3 {
 }
 .axes text {
   fill: #343a40;
-}
-
-/*Table Styling*/
-table {
-  width: 100%;
-  height: 150px;
-}
-td {
-  text-align: center;
-  height: 10px;
-  padding: 5px;
 }
 
 /* Tooltips */

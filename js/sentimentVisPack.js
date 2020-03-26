@@ -36,27 +36,29 @@ function sentimentVisPack(data) {
                 var image = document.getElementById("hover-img-pack");
                 image.src = d.data.url;
                 document.getElementById("title").innerHTML =
-                    "<strong>Title: </strong>" + d.data.title;
+                    "<em>" + d.data.title + "</em>";
                 document.getElementById("artist").innerHTML =
                     "<strong>Artist: </strong>" + d.data.artist;
                 document.getElementById("century").innerHTML =
                     "<strong>Century: </strong>" + d.data.century;
                 document.getElementById("emotion").innerHTML =
-                    "<strong>Dominant emotion: </strong>" + d.data.name.toLowerCase();
-                document.getElementById("confidence").innerHTML =
-                    "<strong>AI confidence: </strong>" + Math.floor(d.data.value) + "%";
+                    "<strong>Dominant sentiment: </strong>" + d.data.name.toLowerCase()
+                    + " (" + Math.floor(d.data.value) + "% confidence)";
+                document.getElementById("gender").innerHTML =
+                    "<strong>Gender: </strong>" + d.data.gender.toLowerCase()
+                    + " (" + Math.floor(d.data.gconfidence) + "% confidence)";
             }
         })
         .on("mouseout", function(d) {
             if (d.data.name === undefined) {
-                var image = document.getElementById("hover-img");
+                var image = document.getElementById("hover-img-pack");
                 image.src = "img/hamlogo.png";
                 document.getElementById("title").innerHTML = "";
                 document.getElementById("artist").innerHTML = "";
                 document.getElementById("century").innerHTML =
                     "<strong>Hover over circles <br> to view paintings</strong>";
                 document.getElementById("emotion").innerHTML = "";
-                document.getElementById("confidence").innerHTML = "";
+                document.getElementById("gender").innerHTML = "";
             }
         });
 
@@ -108,6 +110,8 @@ function getHierarchyData(data) {
                 var child = {
                     "name": data[j].emotion.Value,
                     "value": data[j].emotion.Confidence,
+                    "gender": data[j].gender.Value,
+                    "gconfidence": data[j].gender.Confidence,
                     "children": undefined,
                     "title": data[j].title,
                     "artist": data[j].artist,
