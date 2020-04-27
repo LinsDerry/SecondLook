@@ -109,7 +109,7 @@ h3 {
   stroke: white;
 }
 .axes {
-  /*text-transform: lowercase;*/
+  text-transform: lowercase;
 }
 .axes text {
   fill: #343a40;

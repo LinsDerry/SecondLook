@@ -1,5 +1,5 @@
 // SVG drawing area
-var marginLegend = {top: 50, right: 0, bottom: 50, left: 100};
+var marginLegend = {top: 50, right: 0, bottom: 50, left: 70};
 var widthLegend = 150 - marginLegend.left - marginLegend.right;
 var heightLegend = heightConcentric;
 var svgLegend = d3.selectAll(".sentColLegend").append("svg")        //TO-DO selectAll

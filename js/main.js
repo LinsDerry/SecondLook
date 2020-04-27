@@ -40,20 +40,18 @@ var colorsHue = [];
 var orderedColorsHue = [];
 
 // For transitions, dur is used to update visualization functions.
-const dur = 1000; //Milliseconds
+const dur = 1200; //Milliseconds
 
 /* Load data using d3.queue to prevent unwanted asynchronous activity. */
 d3.queue()
+// .defer(d3.json, 'data/object.json')
     .defer(d3.json, 'data/object.json')
     .defer(d3.json, 'data/annotation.json')
     .await(setup);
 
-//  d3.csv("data/paintings-annotation-AWS.csv", function(data) {
-//      console.log(data[1]);
-// });
-
 /* setup instantiates global arrays and creates the default visualizations. */
 function setup(error, data1, data2) {
+
     objectDataPopulate(data1);
     annotationData = data2;
     artObjects = createArtObjects(objectData, annotationData);
@@ -95,41 +93,29 @@ function objectDataPopulate(data1) {
 made by cross-comparing the imageid fields. */
 function createArtObjects(objectData, annotationData) {
 
-    // var counter = 0;
-    // objectData.forEach(function (object) {
-    //     Match imageid's between objectData and annotationData to combine records
-    //     var contains = false;
-    //     for (var i = 0; i < object.imageids.length; i++) {
-    //         annotationData.forEach(function (annotation) {
-    //             if (object.imageids[i] === annotation.imageid) {
-    //                 contains = true;
-    //                 counter++;
-    //                 object.imageid = annotation.imageid;
-    //                 object.faceimageurl = annotation.faceimageurl;
-    //                 object.gender = annotation.gender;
-    //                 object.emotion = getEmotion(annotation);
-    //             }
-    //         });
-    //         if (contains === true) {
-    //             artObjects.push(object);
-    //             break;
-    //         }
-    //     }
-    // });
-    // console.log("There are this many combined records: " + counter);
-    // console.log("Above number should be equal to artObjects length which is: " + artObjects.length);
-    // console.log("This is the first record in artObjects:");
-    // console.log(artObjects[0]);
-
-    // TO-DO delete once annotationData is fully populated
-    for (var i = 0; i < annotationData.length; i++) {
-        objectData[i].imageid = annotationData[i].imageid;
-        objectData[i].faceimageurl = annotationData[i].faceimageurl;
-        objectData[i].gender = annotationData[i].gender;
-        objectData[i].emotion = getEmotion(annotationData[i]);
-        artObjects.push(objectData[i]);
-    }
-    console.log("There is a mock combined data set.");
+    var counter = 0;
+    objectData.forEach(function (object) {
+        //Match imageids between objectData and annotationData to combine records
+        var contains = false;
+        for (var i = 0; i < object.imageids.length; i++) {
+            annotationData.forEach(function (annotation) {
+                if (object.imageids[i] === annotation.imageid) {
+                    contains = true;
+                    counter++;
+                    object.imageid = annotation.imageid;
+                    object.faceimageurl = annotation.faceimageurl;
+                    object.gender = annotation.gender;
+                    object.emotion = getEmotion(annotation);
+                }
+            });
+            if (contains === true) {
+                artObjects.push(object);
+                break;
+            }
+        }
+    });
+    console.log("There are this many combined records: " + counter);
+    console.log("Above number should be equal to artObjects length which is: " + artObjects.length);
     console.log("This is the first record in artObjects:");
     console.log(artObjects[0]);
 
@@ -156,16 +142,17 @@ function getEmotion(annotation) {
 }
 
 /* sentimentColorKey returns a map where the key is the emotion and the value, an arbitrarily assigned color.
- (Using AWS Rekognition's seven emotions used for facial analysis.) */
+ (Using AWS Rekognition's eight emotions used for facial analysis.) */
 function sentimentColorKey() {
     var key = [];
     key["DISGUSTED"] = "#216000";
-    key["SAD"] = "#2a3b90"; //"#0c0d49";
+    key["SAD"] = "#2a3b90";
     key["CONFUSED"] = "#ffcc99";
     key["ANGRY"] = "#7a2536";
-    key["CALM"] = "#AFEEEE"; //"#2a3b90";
+    key["CALM"] = "#AFEEEE";
     key["HAPPY"] = "#fff853";
-    key["SURPRISED"] = "#ac128f"; //"#873778";
+    key["SURPRISED"] = "#ac128f";
+    key["FEAR"] = "#1a1a1a";
 
     return key;
 }
@@ -228,7 +215,7 @@ function makeSentimentsMap(data) {
     return map;
 }
 
-/* makeColors returns an array of strings, specifically, the color (hex or hue) values listed in each record's
+/* makeColors returns an array of strings, specifically, the prominent color (hex or hue) value listed in each record's
  colors array. I am using an array and not a set bcs I want to count the recurrences and the array's length later on.
  This function accepts data as an argument which could potentially be the artObjects, female, or male arrays where
  d.color/d.hue could be navigated to as follows. */
@@ -238,11 +225,6 @@ function makeColors(data, kind, range) {
 
     if (kind === "hex") {
         data.forEach(function (record) {
-            // ALL colors
-            // record.colors.forEach(function (d) {
-            //     colors.push(d.color);
-            // });
-
             // Only prominent colors
             colors.push(record.colors[0].color);
         });
@@ -250,11 +232,6 @@ function makeColors(data, kind, range) {
 
     if (kind === "hue") {
         data.forEach(function (record) {
-            // ALL hues
-            // record.colors.forEach(function (d) {
-            //     colors.push(d.hue);
-            // });
-
             // Only prominent hues
             colors.push(record.colors[0].hue);
         });
@@ -347,8 +324,11 @@ function sentRadio(value) {
             }
             if (!includeEmotion) {
                 result[k].style.display = "none";
-            } else {
+                // result[k].style.color = "grey";
+            }
+            else {
                 result[k].style.display = "inline";
+                // result[k].style.color = "black";
             }
         }
     }
@@ -429,7 +409,7 @@ function updateVisualizations() {
             if (value === "hue" || value === "hex") {
                 radioColor = value;
             }
-            // if (value !== "hue" && value !== "hex") {
+
             data = updateData(value, gender, emotion);
             wrangleData(data);
 
@@ -458,10 +438,7 @@ function isGender(value) {
 
 /* isEmotion returns a boolean value for whether or not radio input is an emotion selection */
 function isEmotion(value) {
-    var allEmotions = [];
-    annotationData[0].emotions.forEach(function (d) {
-        allEmotions.push(d.Type);
-    });
+    var allEmotions = ["CALM", "ANGRY", "SURPRISED", "CONFUSED", "HAPPY", "SAD", "DISGUSTED", "FEAR"];
     var isEmotion = false;
     for (var j = 0; j < allEmotions.length; j++) {
         if (value === allEmotions[j] || value === "all_sent") {
@@ -517,49 +494,3 @@ function updateRadioInterfaces(value) {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-// function brushed() {
-//
-//     // TO-DO: React to 'brushed' event
-//     var selectionRange = d3.brushSelection(d3.select(".brush").node());
-//     var selectionDomain = selectionRange.map(timeline.x.invert);
-// }
-
-//Code for before I added sent to html labels
-// var selection = document.getElementsByClassName("radio");
-// var result = [];
-// for (var i = 0; i < selection.length; i++) {
-//     for (var j = 0; j < allEmotions.length; j++) {
-//         selection[i].classList.forEach(function (d) {
-//             if (d === allEmotions[j]) {
-//                 result.push(selection[i]);
-//             }
-//         });
-//     }
-// }
-
-// For retrieving all sentiments
-// var allEmotions = [];
-// allEmotions.push("all_sent");
-// annotationData[0].emotions.forEach(function (d) {
-//     allEmotions.push(d.Type);
-// });
-
-// var apiEndpointBaseURL = "https://api.harvardartmuseums.org/annotation";
-// var queryString = $.param({
-//     apikey: "ed473380-f7f7-11e9-ac89-7bb693659e8d",
-//     q: "type:face"
-// });
-//
-// $.getJSON(apiEndpointBaseURL + "?" + queryString, function(data) {
-//     console.log(data);
-// });

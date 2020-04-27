@@ -52,7 +52,7 @@ function sentimentVisConcentric(data) {
         })
         .attr("cy",height / 3)
         .attr("r",function(d) {
-            return (d.emotion.Confidence * .75);
+            return (d.emotion.Confidence * .65);
         })
         .style("fill", function (d) {
             return sentColKey[d.emotion.Value];
@@ -77,11 +77,11 @@ function sentimentVisConcentric(data) {
     // Update tool-tip display information
     tipC.html(function(d) {
         if (sentimentsMap[d.emotion.Value] === 1) {
-            return "<span class = tip> Of the " + data.length + " selected paintings, " + sentimentsMap[d.emotion.Value] +
+            return "<span class = tip> " + sentimentsMap[d.emotion.Value] + " painting" +
                 " is predominantly seen as <span style='color:red'><strong>" + d.emotion.Value + "</strong></span> by AI." + "</span>";
         }
         if (sentimentsMap[d.emotion.Value] > 1) {
-            return "<span class = tip> Of the " + data.length + " selected paintings, " + sentimentsMap[d.emotion.Value] +
+            return "<span class = tip> " + sentimentsMap[d.emotion.Value] + " paintings" +
                 " are predominantly seen as <span style='color:red'><strong>" + d.emotion.Value + "</strong></span> by AI." + "</span>";
         }
     });
