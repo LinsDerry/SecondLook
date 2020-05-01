@@ -1,7 +1,7 @@
 // SVG drawing area
 var marginMosaic = marginPack;
-var widthMosaic = widthConcentric / 2;
-var heightMosaic = 540 - marginMosaic.top - marginMosaic.bottom;
+var widthMosaic = 700 - marginMosaic.left - marginMosaic.right;
+var heightMosaic = 550 - marginMosaic.top - marginMosaic.bottom;
 var svgMosaic = d3.select("#colorVisMosaic").append("svg")
     .attr("width", widthMosaic + marginMosaic.left + marginMosaic.right)
     .attr("height", heightMosaic + marginMosaic.top + marginMosaic.bottom)

@@ -1,6 +1,6 @@
 // SVG drawing area
 var marginBlock = marginPack;
-var widthBlock = 1000;
+var widthBlock = widthConcentric;
 var heightBlock = 200 - marginBlock.top - marginBlock.bottom;
 var svgBlock = d3.select("#colorVisBlock").append("svg")
     .attr("width", widthBlock + marginBlock.left + marginBlock.right)
@@ -23,7 +23,10 @@ function colorVisBlock(colors, orderedColors, data) {
 
     var xTracker = 0;
 
-    var updateRect = svgBlock.selectAll("rect").data(orderedColors);
+    var updateRect = svgBlock.selectAll("rect")
+        .data(orderedColors, function(d) {
+            return d.color;
+        });
     var enterRect = updateRect.enter()
         .append("rect")
         .attr("class", "rec")

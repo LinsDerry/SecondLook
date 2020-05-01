@@ -1,5 +1,4 @@
 body {
-  /*font-family: Verdana;*/
   font-family: Suisse Regular,sans-serif;
   color: #343a40;
   text-align: center;
@@ -8,54 +7,49 @@ body {
   padding: 25px;
   margin: 25px;
 }
-.chart, .art-object-details, img, label.title, .note {
-  /*border: 0.5px solid #E0E0E0;*/
+.art-object-details, img, label.title {
   padding: 15px;
   margin: 15px;
 }
 .chart {
-  /*background: #F0F0F0;*/
-  padding: 10px 20px 10px 20px;
-  margin: 10px 55px 10px 55px;
-}
-.note {
-  padding: 0px 0px 10px 20px;
-  margin: 0px 0px 10px 55px;
-}
-label.title {
   padding: 10px;
-  margin: 5px;
+  margin: 10px;
+}
+.menu {
+  text-align: left;
+  padding-left: 0;
+  margin-left: 0;
+}
+label.title, form {
+  padding: 3px;
+  margin: 8px;
+  background: #bfbfbf;
+  font-weight: 500;
+}
+.radio {
+  display: block;
+  /*display: inline;*/
+  position: relative;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 2px 0 2px 0;
+  margin: 2px 0 2px 0;
 }
 #colorVisWheel {
   margin: 5px;
   padding: 5px;
 }
-.radio {
-  display: inline;
-  position: relative;
-  padding-left: 10px;
-  cursor: pointer;
-  text-transform: lowercase;
-}
-/* Hide radio buttons for sentiment upon page load */
-.radio.sent {
-  display: none;
-}
 #art-object-details, .axes, .radio, .note, table, label, form {
   font-size: 12px;
 }
-label, form {
-  text-align: left;
-  padding: 10px;
-}
-.title, table {
+.title, table, #mosaic-message-0 {
   background: #F8F8F8;
   padding: 5px;
   letter-spacing: 0.05em;
   border: 0;
   border-radius: 8px;
 }
-.sentColLegend, label input {
+.sentColLegend, label.title {
   letter-spacing: 0.05em;
 }
 img {
@@ -90,26 +84,28 @@ h1 {
   margin: 25px 200px 5px 200px;
 }
 h2 {
-  margin: 50px 50px 10px 50px;
+  margin: 50px 400px 10px 400px;
   padding: 35px 15px 10px 15px;
-  font-size: 30px;
+  font-size: 33px;
 }
 h3 {
-  margin: 35px 200px 35px 200px;
+  margin: 35px 400px 35px 400px;
   font-size: 16px;
   text-align: justify;
   line-height: 1.7;
 }
-/*.axesLabels {*/
-/*  fill: darkblue;*/
-/*  font-size: 11px;*/
-/*  text-transform: lowercase;*/
-/*}*/
+
 .axes path {
-  stroke: white;
+  stroke: #343a40;
 }
 .axes {
   text-transform: lowercase;
+}
+.axes-label {
+  text-transform: none;
+}
+.note {
+  font-style: italic;
 }
 .axes text {
   fill: #343a40;
@@ -120,9 +116,9 @@ h3 {
 .d3-tip {
   position: absolute;
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
   color: white;
-  width: 250px;
+  width: 300px;
   height: auto;
   padding: 8px;
   background: rgba(0, 0, 0, 0.65);

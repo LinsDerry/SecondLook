@@ -37,38 +37,34 @@
     </div>
   </div>
 
-  <div class="row chart radio-menu">
-    <div class="col-md-12" >
-      <label class="title"><strong>Filter by gender:</strong>
+  <div class="row chart">
+    <div class="col-md-2 menu">
+      <label class="title"><strong>Gender:</strong>
         <form>
           <label class="radio all"><input type="radio" name="gender" value="all" checked> All</label>
           <label class="radio female gen"><input type="radio" name="gender" value="female"> Female</label>
           <label class="radio male gen"><input type="radio" name="gender" value="male"> Male</label>
         </form>
       </label>
-      <label class="title"><strong>Filter by sentiment:</strong>
+      <label class="title"><strong>Sentiment:</strong>
         <form>
-          <label class="radio all_sent"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
-          <label class="radio HAPPY sent"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
-          <label class="radio SAD sent"><input type="radio" name="sentiment" value="SAD"> Sad</label>
-          <label class="radio CALM sent"><input type="radio" name="sentiment" value="CALM"> Calm</label>
-          <label class="radio ANGRY sent"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
-          <label class="radio DISGUSTED sent"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
-          <label class="radio CONFUSED sent"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
-          <label class="radio SURPRISED sent"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
-          <label class="radio FEAR sent"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
+          <label class="radio all_sent" style="color:#343a40;"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
+          <label class="radio HAPPY sent" style="color:#fff853;"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
+          <label class="radio SAD sent" style="color:#2a3b90;"><input type="radio" name="sentiment" value="SAD"> Sad</label>
+          <label class="radio CALM sent" style="color:#AFEEEE;"><input type="radio" name="sentiment" value="CALM"> Calm</label>
+          <label class="radio ANGRY sent" style="color:#7a2536;"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
+          <label class="radio DISGUSTED sent" style="color:#216000;"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
+          <label class="radio CONFUSED sent" style="color:#ffcc99;"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
+          <label class="radio SURPRISED sent" style="color:#ac128f;"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
+          <label class="radio FEAR sent" style="color:#1a1a1a;"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
         </form>
       </label>
     </div>
-  </div>
-
-  <div class="row chart">
-    <div class="col-md-1">
-      <div class = "sentColLegend" class = "chart"></div>
-    </div>
+<!--    <div class="col-md-1">-->
+<!--      <div class = "chart sentColLegend"></div>-->
+<!--    </div>-->
     <div class="col-md-7" >
-      <div id="sentimentVisPack" class = "chart"></div>
-      <span class="note"><em>Circle sizes are relative to AI's confidence that the painting portrays the given sentiment.</em></span>
+      <div id="sentimentVisPack" class="chart"></div>
     </div>
     <div class = "col-md-3">
       <table class = "art-object-details">
@@ -104,39 +100,36 @@
     </div>
   </div>
 
-  <div class="row chart radio-menu">
-    <div class="col-md-12" >
-      <label class="title"><strong>Filter by gender:</strong>
+  <div class="row chart">
+    <div class="col-md-2 menu">
+      <label class="title"><strong>Gender:</strong>
         <form>
           <label class="radio all"><input type="radio" name="gender" value="all" checked> All</label>
           <label class="radio female gen"><input type="radio" name="gender" value="female"> Female</label>
           <label class="radio male gen"><input type="radio" name="gender" value="male"> Male</label>
         </form>
       </label>
-      <label class="title"><strong>Filter by sentiment:</strong>
+      <label class="title"><strong>Sentiment:</strong>
         <form>
-          <label class="radio all_sent"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
-          <label class="radio HAPPY sent"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
-          <label class="radio SAD sent"><input type="radio" name="sentiment" value="SAD"> Sad</label>
-          <label class="radio CALM sent"><input type="radio" name="sentiment" value="CALM"> Calm</label>
-          <label class="radio ANGRY sent"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
-          <label class="radio DISGUSTED sent"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
-          <label class="radio CONFUSED sent"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
-          <label class="radio SURPRISED sent"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
-          <label class="radio FEAR sent"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
+          <label class="radio all_sent" style="color:#343a40;"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
+          <label class="radio HAPPY sent" style="color:#fff853;"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
+          <label class="radio SAD sent" style="color:#2a3b90;"><input type="radio" name="sentiment" value="SAD"> Sad</label>
+          <label class="radio CALM sent" style="color:#AFEEEE;"><input type="radio" name="sentiment" value="CALM"> Calm</label>
+          <label class="radio ANGRY sent" style="color:#7a2536;"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
+          <label class="radio DISGUSTED sent" style="color:#216000;"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
+          <label class="radio CONFUSED sent" style="color:#ffcc99;"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
+          <label class="radio SURPRISED sent" style="color:#ac128f;"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
+          <label class="radio FEAR sent" style="color:#1a1a1a;"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
         </form>
       </label>
     </div>
-  </div>
 
-  <div class="row chart">
-    <div class="col-md-1">
-      <div class = "sentColLegend" class = "chart"></div>
+    <div class="col-md-10">
+      <div id="sentimentVisConcentric" class="chart"></div>
     </div>
-    <div class="col-md-11">
-      <div id="sentimentVisConcentric" class = "chart"></div>
-      <span class="note"><em>Circle sizes are relative to AI's confidence that the painting portrays the given sentiment.</em></span>
-    </div>
+<!--    <div class="col-md-2">-->
+<!--      <div class = "chart sentColLegend"></div>-->
+<!--    </div>-->
   </div>
 
   <h3>
@@ -149,38 +142,6 @@
     </div>
   </div>
 
-  <div class="row chart radio-menu">
-    <div class="col-md-12" >
-      <label class="title"><strong>Filter by gender:</strong>
-        <form>
-          <label class="radio all"><input type="radio" name="gender" value="all" checked> All</label>
-          <label class="radio female gen"><input type="radio" name="gender" value="female"> Female</label>
-          <label class="radio male gen"><input type="radio" name="gender" value="male"> Male</label>
-        </form>
-      </label>
-      <label class="title"><strong>View by color families or discrete colors:</strong>
-        <form>
-          <label class="radio hex"><input type="radio" name="color" value="hex" checked> Color</label>
-          <label class="radio hue"><input type="radio" name="color" value="hue"> Hue</label>
-        </form>
-      </label>
-      <br>
-      <label class="title"><strong>Filter by sentiment:</strong>
-        <form>
-          <label class="radio all_sent"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
-          <label class="radio HAPPY sent"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
-          <label class="radio SAD sent"><input type="radio" name="sentiment" value="SAD"> Sad</label>
-          <label class="radio CALM sent"><input type="radio" name="sentiment" value="CALM"> Calm</label>
-          <label class="radio ANGRY sent"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
-          <label class="radio DISGUSTED sent"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
-          <label class="radio CONFUSED sent"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
-          <label class="radio SURPRISED sent"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
-          <label class="radio FEAR sent"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
-        </form>
-      </label>
-    </div>
-  </div>
-
   <div class="row chart">
     <div class="col-md-12">
       <div id="colorVisBlock" class = "chart">
@@ -189,12 +150,39 @@
     </div>
 
     <div class="row chart">
-      <div class="col-md-8">
+      <div class="col-md-2 menu">
+        <label class="title"><strong>Color:</strong>
+          <form>
+            <label class="radio hex"><input type="radio" name="color" value="hex" checked> Color</label>
+            <label class="radio hue"><input type="radio" name="color" value="hue"> Hue</label>
+          </form>
+        </label>
+        <label class="title"><strong>Gender:</strong>
+          <form>
+            <label class="radio all"><input type="radio" name="gender" value="all" checked> All</label>
+            <label class="radio female gen"><input type="radio" name="gender" value="female"> Female</label>
+            <label class="radio male gen"><input type="radio" name="gender" value="male"> Male</label>
+          </form>
+        </label>
+        <label class="title"><strong>Sentiment:</strong>
+          <form>
+            <label class="radio all_sent" style="color:#343a40;"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
+            <label class="radio HAPPY sent" style="color:#fff853;"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
+            <label class="radio SAD sent" style="color:#2a3b90;"><input type="radio" name="sentiment" value="SAD"> Sad</label>
+            <label class="radio CALM sent" style="color:#AFEEEE;"><input type="radio" name="sentiment" value="CALM"> Calm</label>
+            <label class="radio ANGRY sent" style="color:#7a2536;"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
+            <label class="radio DISGUSTED sent" style="color:#216000;"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
+            <label class="radio CONFUSED sent" style="color:#ffcc99;"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
+            <label class="radio SURPRISED sent" style="color:#ac128f;"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
+            <label class="radio FEAR sent" style="color:#1a1a1a;"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
+          </form>
+        </label>
+      </div>
+      <div class="col-md-7">
         <div id="colorVisMosaic" class = "chart">
-          <!--        <label class="title" id="mosaic-message-1"></label>-->
         </div>
       </div>
-      <div class="col-md-4">
+      <div class="col-md-3">
         <div id="colorVisWheel" class = "chart"></div>
         <table class = "art-object-details">
           <tbody>

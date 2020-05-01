@@ -1,3 +1,5 @@
+/* Currently not in use but originally intended for sentimentVisPack and sentimentVisConcentric. */
+
 // SVG drawing area
 var marginLegend = {top: 50, right: 0, bottom: 50, left: 70};
 var widthLegend = 150 - marginLegend.left - marginLegend.right;

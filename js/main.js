@@ -23,6 +23,8 @@ var sentiments = [];
 /* A map where the key is the emotion and the value is its recurrence. For simplification,
  the emotion with the highest probability per art object is counted toward the sum of recurrence. */
 var sentimentsMap = [];
+var femaleSentMap = [];
+var maleSentMap = [];
 
 /* A map where the key is the emotion and the value, an arbitrarily assigned color. */
 var sentColKey = [];
@@ -44,7 +46,6 @@ const dur = 1200; //Milliseconds
 
 /* Load data using d3.queue to prevent unwanted asynchronous activity. */
 d3.queue()
-// .defer(d3.json, 'data/object.json')
     .defer(d3.json, 'data/object.json')
     .defer(d3.json, 'data/annotation.json')
     .await(setup);
@@ -62,7 +63,7 @@ function setup(error, data1, data2) {
     sentimentVisPack(artObjects);
     sentimentVisConcentric(artObjects);
     colorVisualizations("hex", artObjects);
-    colorMosaic(orderedColorsHex[orderedColorsHex.length - 13], artObjects);
+    colorMosaic(orderedColorsHex[orderedColorsHex.length - 1], artObjects);
     sentColLegend();
     sentRadio("all");
 
@@ -161,10 +162,6 @@ function sentimentColorKey() {
 *  makeOrderedColors to update global variables according to choice. choice can be artObjects or a
 *  variation of it. */
 function wrangleData(choice) {
-
-    /* TO-DO: Uncomment this once combined artObjects is potent. Restore first two objects in annotation.json
-    (imageid and gender fields) */
-
     female = artObjects.filter(function (d) {
         return d.gender.Value === "Female";
     });
@@ -174,6 +171,8 @@ function wrangleData(choice) {
 
     sentiments = getSentiments(choice);
     sentimentsMap = makeSentimentsMap(choice);
+    femaleSentMap = makeSentimentsMap(female);
+    maleSentMap = makeSentimentsMap(male);
 
     colorsHex = makeColors(choice, "hex");
     colorsHexMap = makeColorsMap(colorsHex);
@@ -194,6 +193,7 @@ function getSentiments(data) {
             emotionSet.push(data[j].emotion.Value);
         }
     }
+
     return emotionSet;
 }
 
@@ -287,17 +287,17 @@ function makeOrderedColors(colors, map) {
 function colorVisualizations(kind, data) {
     if (kind === "hue") {
         colorVisBlock(colorsHue, orderedColorsHue, data);
+        colorMosaic(orderedColorsHue[orderedColorsHue.length - 1], data);
         document.getElementById("mosaic-message-0").innerHTML = "<strong>" +
             "Click on a hue to view paintings where that hue is most prominent:"
             + "</strong>";
-        // colorVisWheel(orderedColorsHue, data);
     }
     if (kind === "hex") {
         colorVisBlock(colorsHex, orderedColorsHex, data);
+        colorMosaic(orderedColorsHex[orderedColorsHex.length - 1], data);
         document.getElementById("mosaic-message-0").innerHTML = "<strong>" +
             "Click on a color to view paintings where that color is most prominent:"
             + "</strong>";
-        // colorVisWheel(orderedColorsHex, data);
     }
 }
 
@@ -305,30 +305,47 @@ function colorVisualizations(kind, data) {
 function sentRadio(value) {
 
     var result;
+    var result2;
 
     /* Makes visible the sentiment radio buttons for the given sentiments in the selection. For example,
      if female is selected and female has no art objects annotated as disgusting, disgusting is hidden. */
     if (isGender(value)) {
         // Populate result with radio elements for sentiment
         result = document.getElementsByClassName("radio sent");
+        result2 = document.getElementsByName("sentiment");
         var includeEmotion;
+        var sent;
 
+        // Edits color of radio button labels
         for (var k = 0; k < result.length; k++) {
             includeEmotion = false;
             for (var l = 0; l < sentiments.length; l++) {
                 result[k].classList.forEach(function (d) {
                     if (d === sentiments[l]) {
                         includeEmotion = true;
+                        sent = sentiments[l];
                     }
                 });
             }
             if (!includeEmotion) {
-                result[k].style.display = "none";
-                // result[k].style.color = "grey";
+                result[k].style.color = "#e5e5e5";
+            } else {
+                result[k].style.color = sentColKey[sent];
             }
-            else {
-                result[k].style.display = "inline";
-                // result[k].style.color = "black";
+        }
+        // Edits ability to click on radio buttons
+        for (var m = 0; m < result2.length; m++) {
+            includeEmotion = false;
+            for (var n = 0; n < sentiments.length; n++) {
+                if (result2[m].value === sentiments[n] || result2[m].value === "all_sent") {
+                    includeEmotion = true;
+                }
+            }
+            if (!includeEmotion) {
+                result2[m].disabled = true;
+            }
+            if (includeEmotion) {
+                result2[m].disabled = false;
             }
         }
     }
@@ -341,156 +358,175 @@ function sentRadio(value) {
         }
         // Populate result with radio elements for gender
         result = document.getElementsByClassName("radio gen");
+        result2 = document.getElementsByName("gender");
         var includeFemale = hasEmo(value, female);
         var includeMale = hasEmo(value, male);
 
+        // Edits color of radio button labels
         for (var i = 0; i < result.length; i++) {
             result[i].classList.forEach(function (d) {
                 if (d === "female") {
                     if (!includeFemale) {
-                        result[i].style.display = "none";
+                        result[i].style.color = "#e5e5e5";
                     } else {
-                        result[i].style.display = "inline";
+                        result[i].style.color = "#343a40";
                     }
                 }
                 if (d === "male") {
                     if (!includeMale) {
-                        result[i].style.display = "none";
+                        result[i].style.color = "#e5e5e5";
                     } else {
-                        result[i].style.display = "inline";
+                        result[i].style.color = "#343a40";
                     }
                 }
             });
         }
-    }
-}
-
-/* hasEmo returns a boolean for whether or not data has art objects annotated with the given emotion or emo */
-function hasEmo(emo, data) {
-    if (emo === "all_sent") {
-        return true;
-    }
-    else {
-        var hasEmo = false;
-
-        for (var d = 0; d < data.length; d++) {
-            if (data[d].emotion.Value === emo) {
-                hasEmo = true;
-            }
-            if (hasEmo === true) {
-                return hasEmo;
+        // Edits ability to click on radio buttons
+        for (var j = 0; j < result2.length; j++) {
+            if (result2[j].value === "female") {
+                if (!includeFemale) {
+                    result2[j].disabled = true;
+                } else {
+                    result2[j].disabled = false;
+                }
+                if (result2[j].value === "male") {
+                    if (!includeMale) {
+                        result2[j].disabled = true;
+                    } else {
+                        result2[j].disabled = false;
+                    }
+                }
             }
         }
-        return hasEmo;
     }
 }
 
-/* updateVisualizations "listens" for user-initiated events then updates the visualizations. */
-function updateVisualizations() {
+    /* hasEmo returns a boolean for whether or not data has art objects annotated with the given emotion or emo */
+    function hasEmo(emo, data) {
+        if (emo === "all_sent") {
+            return true;
+        }
+        else {
+            var hasEmo = false;
 
-    // Set default values
-    var data = artObjects;
-    var gender = "all";
-    var emotion = "all_sent";
-    var radioColor = "hex";
-
-    // Event listener coordinates filtering across all visualizations
-    d3.selectAll("input")
-        .on("change", function() {
-            var value = this.value;
-
-            if (isGender(value)) {
-                gender = value;
+            for (var d = 0; d < data.length; d++) {
+                if (data[d].emotion.Value === emo) {
+                    hasEmo = true;
+                }
+                if (hasEmo === true) {
+                    return hasEmo;
+                }
             }
-            if (isEmotion(value)) {
-                emotion = value;
-            }
-
-            if (value === "hue" || value === "hex") {
-                radioColor = value;
-            }
-
-            data = updateData(value, gender, emotion);
-            wrangleData(data);
-
-            // Updates visualizations with wrangled data
-            sentimentVisPack(data);
-            sentimentVisConcentric(data);
-            colorVisualizations(radioColor, data);
-            sentColLegend();
-            sentRadio(value);
-
-            // Update radio interfaces
-            updateRadioInterfaces(value);
-        });
-}
-
-/* isGender returns a boolean value for whether or not radio input is a gender selection */
-function isGender(value) {
-    var isGender = false;
-
-    if (value === "all" || value === "female" || value === "male") {
-        isGender = true;
-    }
-
-    return isGender;
-}
-
-/* isEmotion returns a boolean value for whether or not radio input is an emotion selection */
-function isEmotion(value) {
-    var allEmotions = ["CALM", "ANGRY", "SURPRISED", "CONFUSED", "HAPPY", "SAD", "DISGUSTED", "FEAR"];
-    var isEmotion = false;
-    for (var j = 0; j < allEmotions.length; j++) {
-        if (value === allEmotions[j] || value === "all_sent") {
-            isEmotion = true;
+            return hasEmo;
         }
     }
-    return isEmotion;
-}
 
-/* updateData returns artObjects as a new filtered array for updating all visualizations according to the
-*  user's selection for gender and emotion.  */
-function updateData(value, gender, emotion) {
+    /* updateVisualizations "listens" for user-initiated events then updates the visualizations. */
+    function updateVisualizations() {
 
-    /* Filter data according to gender and emotion */
-    var data;
+        // Set default values
+        var data = artObjects;
+        var gender = "all";
+        var emotion = "all_sent";
+        var radioColor = "hex";
 
-    if (gender === "all" && emotion === "all_sent") {
-        data = artObjects;
-    }
-    if (gender === "female" && emotion === "all_sent") {
-        data = female;
-    }
-    if (gender === "male" && emotion === "all_sent") {
-        data = male;
-    }
-    if (gender === "all" && emotion !== "all_sent") {
-        data = artObjects.filter(function (d) {
-            return d.emotion.Value === emotion;
-        });
-    }
-    if (gender === "female" && emotion !== "all_sent") {
-        data = female.filter(function (d) {
-            return d.emotion.Value === emotion;
-        });
-    }
-    if (gender === "male" && emotion !== "all_sent") {
-        data = male.filter(function (d) {
-            return d.emotion.Value === emotion;
-        });
-    }
-    return data;
-}
+        // Event listener coordinates filtering across all visualizations
+        d3.selectAll("input")
+            .on("change", function() {
+                var value = this.value;
 
-/* updateRadioInterfaces visually updates radio buttons across document (page). For example, if the user
- selects female then all female radio buttons become checked. */
-function updateRadioInterfaces(value) {
-    var className = "radio " + value;
-    var buttons = document.getElementsByClassName(className);
+                if (isGender(value)) {
+                    gender = value;
+                }
+                if (isEmotion(value)) {
+                    emotion = value;
+                }
 
-    // Check matching radio buttons across page
-    for (var i = 0; i < buttons.length; i++) {
-        buttons[i].control.checked = true;
+                if (value === "hue" || value === "hex") {
+                    radioColor = value;
+                }
+
+                data = updateData(value, gender, emotion);
+                wrangleData(data);
+
+                // Updates visualizations with wrangled data
+                sentimentVisPack(data);
+                sentimentVisConcentric(data);
+                colorVisualizations(radioColor, data);
+                sentColLegend();
+                sentRadio(value);
+
+                // Update radio interfaces
+                updateRadioInterfaces(value);
+            });
     }
-}
+
+    /* isGender returns a boolean value for whether or not radio input is a gender selection */
+    function isGender(value) {
+        var isGender = false;
+
+        if (value === "all" || value === "female" || value === "male") {
+            isGender = true;
+        }
+
+        return isGender;
+    }
+
+    /* isEmotion returns a boolean value for whether or not radio input is an emotion selection */
+    function isEmotion(value) {
+        var allEmotions = ["CALM", "ANGRY", "SURPRISED", "CONFUSED", "HAPPY", "SAD", "DISGUSTED", "FEAR"];
+        var isEmotion = false;
+        for (var j = 0; j < allEmotions.length; j++) {
+            if (value === allEmotions[j] || value === "all_sent") {
+                isEmotion = true;
+            }
+        }
+        return isEmotion;
+    }
+
+    /* updateData returns artObjects as a new filtered array for updating all visualizations according to the
+    *  user's selection for gender and emotion.  */
+    function updateData(value, gender, emotion) {
+
+        /* Filter data according to gender and emotion */
+        var data;
+
+        if (gender === "all" && emotion === "all_sent") {
+            data = artObjects;
+        }
+        if (gender === "female" && emotion === "all_sent") {
+            data = female;
+        }
+        if (gender === "male" && emotion === "all_sent") {
+            data = male;
+        }
+        if (gender === "all" && emotion !== "all_sent") {
+            data = artObjects.filter(function (d) {
+                return d.emotion.Value === emotion;
+            });
+        }
+        if (gender === "female" && emotion !== "all_sent") {
+            data = female.filter(function (d) {
+                return d.emotion.Value === emotion;
+            });
+        }
+        if (gender === "male" && emotion !== "all_sent") {
+            data = male.filter(function (d) {
+                return d.emotion.Value === emotion;
+            });
+        }
+        return data;
+    }
+
+    /* updateRadioInterfaces visually updates radio buttons across document (page). For example, if the user
+     selects female then all female radio buttons become checked. */
+    function updateRadioInterfaces(value) {
+        var className = "radio " + value;
+        var buttons = document.getElementsByClassName(className);
+
+        // Check matching radio buttons across page
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].control.checked = true;
+        }
+    }
 
