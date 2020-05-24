@@ -1,3 +1,4 @@
+
 /* The following arrays will be used to store the Harvard Art Museums' (HAM) data in ways that are most
 helpful for constructing the visualizations; these are global variables, so therefore, I am describing
 them here: */
@@ -64,6 +65,7 @@ function setup(error, data1, data2) {
     sentimentVisConcentric(artObjects);
     colorVisualizations("hex", artObjects);
     colorMosaic(orderedColorsHex[orderedColorsHex.length - 1], artObjects);
+    sentimentVisTime(artObjects);
     sentColLegend();
     sentRadio("all");
 
@@ -94,19 +96,35 @@ function objectDataPopulate(data1) {
 made by cross-comparing the imageid fields. */
 function createArtObjects(objectData, annotationData) {
 
+    // Simplifies the century field. For example, "12th-13th century" becomes "12th century"
+    var simplifyCentury = function(century) {
+        var string = "";
+        for (var i = 0; i < century.length; i++) {
+            if (century[i] === '-' || century[i] === " " ) {
+                break;
+            }
+            else {
+                string += century[i];
+            }
+        }
+        string += " century";
+        return string;
+    };
+
     var counter = 0;
     objectData.forEach(function (object) {
         //Match imageids between objectData and annotationData to combine records
         var contains = false;
         for (var i = 0; i < object.imageids.length; i++) {
             annotationData.forEach(function (annotation) {
-                if (object.imageids[i] === annotation.imageid) {
+                if (object.imageids[i] === annotation.imageid && object.century !== "") {
                     contains = true;
                     counter++;
                     object.imageid = annotation.imageid;
                     object.faceimageurl = annotation.faceimageurl;
                     object.gender = annotation.gender;
                     object.emotion = getEmotion(annotation);
+                    object.century = simplifyCentury(object.century);
                 }
             });
             if (contains === true) {
@@ -401,132 +419,133 @@ function sentRadio(value) {
     }
 }
 
-    /* hasEmo returns a boolean for whether or not data has art objects annotated with the given emotion or emo */
-    function hasEmo(emo, data) {
-        if (emo === "all_sent") {
-            return true;
-        }
-        else {
-            var hasEmo = false;
+/* hasEmo returns a boolean for whether or not data has art objects annotated with the given emotion or emo */
+function hasEmo(emo, data) {
+    if (emo === "all_sent") {
+        return true;
+    }
+    else {
+        var hasEmo = false;
 
-            for (var d = 0; d < data.length; d++) {
-                if (data[d].emotion.Value === emo) {
-                    hasEmo = true;
-                }
-                if (hasEmo === true) {
-                    return hasEmo;
-                }
+        for (var d = 0; d < data.length; d++) {
+            if (data[d].emotion.Value === emo) {
+                hasEmo = true;
             }
-            return hasEmo;
-        }
-    }
-
-    /* updateVisualizations "listens" for user-initiated events then updates the visualizations. */
-    function updateVisualizations() {
-
-        // Set default values
-        var data = artObjects;
-        var gender = "all";
-        var emotion = "all_sent";
-        var radioColor = "hex";
-
-        // Event listener coordinates filtering across all visualizations
-        d3.selectAll("input")
-            .on("change", function() {
-                var value = this.value;
-
-                if (isGender(value)) {
-                    gender = value;
-                }
-                if (isEmotion(value)) {
-                    emotion = value;
-                }
-
-                if (value === "hue" || value === "hex") {
-                    radioColor = value;
-                }
-
-                data = updateData(value, gender, emotion);
-                wrangleData(data);
-
-                // Updates visualizations with wrangled data
-                sentimentVisPack(data);
-                sentimentVisConcentric(data);
-                colorVisualizations(radioColor, data);
-                sentColLegend();
-                sentRadio(value);
-
-                // Update radio interfaces
-                updateRadioInterfaces(value);
-            });
-    }
-
-    /* isGender returns a boolean value for whether or not radio input is a gender selection */
-    function isGender(value) {
-        var isGender = false;
-
-        if (value === "all" || value === "female" || value === "male") {
-            isGender = true;
-        }
-
-        return isGender;
-    }
-
-    /* isEmotion returns a boolean value for whether or not radio input is an emotion selection */
-    function isEmotion(value) {
-        var allEmotions = ["CALM", "ANGRY", "SURPRISED", "CONFUSED", "HAPPY", "SAD", "DISGUSTED", "FEAR"];
-        var isEmotion = false;
-        for (var j = 0; j < allEmotions.length; j++) {
-            if (value === allEmotions[j] || value === "all_sent") {
-                isEmotion = true;
+            if (hasEmo === true) {
+                return hasEmo;
             }
         }
-        return isEmotion;
+        return hasEmo;
+    }
+}
+
+/* updateVisualizations "listens" for user-initiated events then updates the visualizations. */
+function updateVisualizations() {
+
+    // Set default values
+    var data = artObjects;
+    var gender = "all";
+    var emotion = "all_sent";
+    var radioColor = "hex";
+
+    // Event listener coordinates filtering across all visualizations
+    d3.selectAll("input")
+        .on("change", function() {
+            var value = this.value;
+
+            if (isGender(value)) {
+                gender = value;
+            }
+            if (isEmotion(value)) {
+                emotion = value;
+            }
+
+            if (value === "hue" || value === "hex") {
+                radioColor = value;
+            }
+
+            data = updateData(value, gender, emotion);
+            wrangleData(data);
+
+            // Updates visualizations with wrangled data
+            sentimentVisPack(data);
+            sentimentVisConcentric(data);
+            colorVisualizations(radioColor, data);
+            sentColLegend();
+            sentRadio(value);
+
+            // Update radio interfaces
+            updateRadioInterfaces(value);
+        });
+}
+
+/* isGender returns a boolean value for whether or not radio input is a gender selection */
+function isGender(value) {
+    var isGender = false;
+
+    if (value === "all" || value === "female" || value === "male") {
+        isGender = true;
     }
 
-    /* updateData returns artObjects as a new filtered array for updating all visualizations according to the
-    *  user's selection for gender and emotion.  */
-    function updateData(value, gender, emotion) {
+    return isGender;
+}
 
-        /* Filter data according to gender and emotion */
-        var data;
-
-        if (gender === "all" && emotion === "all_sent") {
-            data = artObjects;
-        }
-        if (gender === "female" && emotion === "all_sent") {
-            data = female;
-        }
-        if (gender === "male" && emotion === "all_sent") {
-            data = male;
-        }
-        if (gender === "all" && emotion !== "all_sent") {
-            data = artObjects.filter(function (d) {
-                return d.emotion.Value === emotion;
-            });
-        }
-        if (gender === "female" && emotion !== "all_sent") {
-            data = female.filter(function (d) {
-                return d.emotion.Value === emotion;
-            });
-        }
-        if (gender === "male" && emotion !== "all_sent") {
-            data = male.filter(function (d) {
-                return d.emotion.Value === emotion;
-            });
-        }
-        return data;
-    }
-
-    /* updateRadioInterfaces visually updates radio buttons across document (page). For example, if the user
-     selects female then all female radio buttons become checked. */
-    function updateRadioInterfaces(value) {
-        var className = "radio " + value;
-        var buttons = document.getElementsByClassName(className);
-
-        // Check matching radio buttons across page
-        for (var i = 0; i < buttons.length; i++) {
-            buttons[i].control.checked = true;
+/* isEmotion returns a boolean value for whether or not radio input is an emotion selection */
+function isEmotion(value) {
+    var allEmotions = ["CALM", "ANGRY", "SURPRISED", "CONFUSED", "HAPPY", "SAD", "DISGUSTED", "FEAR"];
+    var isEmotion = false;
+    for (var j = 0; j < allEmotions.length; j++) {
+        if (value === allEmotions[j] || value === "all_sent") {
+            isEmotion = true;
         }
     }
+    return isEmotion;
+}
+
+/* updateData returns artObjects as a new filtered array for updating all visualizations according to the
+*  user's selection for gender and emotion.  */
+function updateData(value, gender, emotion) {
+
+    /* Filter data according to gender and emotion */
+    var data;
+
+    if (gender === "all" && emotion === "all_sent") {
+        data = artObjects;
+    }
+    if (gender === "female" && emotion === "all_sent") {
+        data = female;
+    }
+    if (gender === "male" && emotion === "all_sent") {
+        data = male;
+    }
+    if (gender === "all" && emotion !== "all_sent") {
+        data = artObjects.filter(function (d) {
+            return d.emotion.Value === emotion;
+        });
+    }
+    if (gender === "female" && emotion !== "all_sent") {
+        data = female.filter(function (d) {
+            return d.emotion.Value === emotion;
+        });
+    }
+    if (gender === "male" && emotion !== "all_sent") {
+        data = male.filter(function (d) {
+            return d.emotion.Value === emotion;
+        });
+    }
+    return data;
+}
+
+/* updateRadioInterfaces visually updates radio buttons across document (page). For example, if the user
+ selects female then all female radio buttons become checked. */
+function updateRadioInterfaces(value) {
+    var className = "radio " + value;
+    var buttons = document.getElementsByClassName(className);
+
+    // Check matching radio buttons across page
+    for (var i = 0; i < buttons.length; i++) {
+        buttons[i].control.checked = true;
+    }
+}
+
 

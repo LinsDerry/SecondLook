@@ -19,7 +19,7 @@ svgPack.append("g")
     .text("Each circle represents a painting; circle sizes are relative to AI's confidence that the painting portrays the given sentiment.");
 
 function sentimentVisPack(data) {
-    console.log("vis un");
+
     var width = widthPack;
     var height = heightPack;
 

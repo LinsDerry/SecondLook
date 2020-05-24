@@ -57,7 +57,7 @@ var tipC = d3.tip()
 svgConcentric.call(tipC);
 
 function sentimentVisConcentric(data) {
-    console.log("vis deux");
+
     var width = widthConcentric;
     var height = heightConcentric;
 

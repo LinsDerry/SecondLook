@@ -10,7 +10,6 @@ var svgWheel = d3.select("#colorVisWheel").append("svg")
     .attr("transform", "translate(" + marginWheel.left / 4 + ", 0)");
 
 function colorVisWheel(orderedColors, data) {
-    console.log("vis trois");
 
     var width = widthWheel;
     var height = heightWheel;

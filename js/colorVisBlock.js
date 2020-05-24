@@ -1,6 +1,6 @@
 // SVG drawing area
 var marginBlock = marginPack;
-var widthBlock = widthConcentric;
+var widthBlock = 1000;
 var heightBlock = 200 - marginBlock.top - marginBlock.bottom;
 var svgBlock = d3.select("#colorVisBlock").append("svg")
     .attr("width", widthBlock + marginBlock.left + marginBlock.right)
@@ -15,7 +15,7 @@ the original data value which was artObjects. Made data_ as a workaround. ? */
 var data_ =[];
 
 function colorVisBlock(colors, orderedColors, data) {
-    console.log("vis quatre");
+
     data_ = data;
 
     var width = widthBlock;

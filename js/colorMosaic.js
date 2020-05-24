@@ -21,7 +21,6 @@ var yScaleMos = d3.scaleBand()
 var hue = false;
 
 function colorMosaic(color, data) {
-    console.log("vis cinq");
 
     hue = isHue(color);
 
@@ -218,7 +217,7 @@ function isHue(color) {
     return color.color[0] !== '#';
 }
 
-/* createMosaicDefs and createWheelDefs creats two sets of pattern-images using the primaryimageurl's in data.
+/* createMosaicDefs and createWheelDefs creates two sets of pattern-images using the primaryimageurl's in data.
 * the Mosaic defs are sized to fill the mosaic rectangles and the wheel defs, to fill the color wheel or donut chart. */
 function createMosaicDefs(data) {
     svgMosaic.selectAll("defs").remove();
