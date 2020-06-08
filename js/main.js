@@ -65,7 +65,8 @@ function setup(error, data1, data2) {
     sentimentVisConcentric(artObjects);
     colorVisualizations("hex", artObjects);
     colorMosaic(orderedColorsHex[orderedColorsHex.length - 1], artObjects);
-    sentimentVisTime(artObjects);
+    genderVisRadial(female, male);
+    // sentimentVisTime(artObjects);
     sentColLegend();
     sentRadio("all");
 

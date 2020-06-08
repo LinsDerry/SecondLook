@@ -15,6 +15,10 @@ body {
   padding: 10px;
   margin: 10px;
 }
+#genderVisRadial {
+  background: #bfbfbf;
+  /*#c9c9c9; */
+}
 .menu {
   text-align: left;
   padding-left: 0;
@@ -42,6 +46,9 @@ label.title, form {
 #art-object-details, .axes, .radio, .note, table, label, form {
   font-size: 12px;
 }
+.radialLabel {
+  font-size: 12px;
+}
 .title, table, #mosaic-message-0 {
   background: #F8F8F8;
   padding: 5px;
@@ -56,6 +63,14 @@ img {
   max-width: 100%;
   height: auto;
   position: center;
+}
+.text-img {
+  max-width: 50%;
+  height: auto;
+  position: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 table {
   width: 100%;
@@ -73,7 +88,7 @@ td {
 #gender, #gender-2 {
   padding-bottom: 8px;
 }
-h1, h2, h3 {
+h1, h2, h3, .radialLabel {
   text-align: center;
   letter-spacing: 0.02em;
   color: black;

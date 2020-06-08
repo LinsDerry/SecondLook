@@ -17,23 +17,26 @@
 
   <div class="row" id="header-row">
     <div class="col-md-12">
-      <h1>Second Look: gender and sentiment <em>on view</em> at the Harvard Art Museums </h1>
+      <h1>Second Look: gender and sentiment <em>on view</em> at the museum </h1>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
+      <img class="text-img" src="img/haminterior.jpeg"></img>
       <h3>
-        The Harvard Art Museums collection spans approximately 250,000 objects that range from antiquity to the present time. Yet only 1,803 objects are on exhibit at the Museums at any given time. Interestingly though, while humans only see 1% of the collection, AI has seen it all. This is due to the Harvard Art Museums employing several commercial AI services to “view” and annotate the museums’ digitally archived collection.
+        The Harvard Art Museums collection spans approximately 250,000 objects that range from antiquity to the present time. Yet only 1,803 objects are on exhibit at the Museums at any given time. Interestingly though, while visitors only see 1% of the collection, AI has seen it all. This is due to the Harvard Art Museums employing several commercial AI services to “view” and annotate the museums’ digitally archived collection. This project takes a second look at those “views”, specifically, the ones performed by Amazon Rekognition on faces found within the paintings collection.
         <br>
-        <br> As a data visualization system, Second Look utilizes one of these services, AWS Rekognition, to analyze the gender and sentiment of faces in paintings found within the digital archive. By observing how AI infers gender and sentiment in paintings in relationship to metadata about the paintings’ color and chronology, we are able to attain new views of the collection. In particular, we are able to observe how gender is represented by artists through time, appropriated by museums, and understood by AI. Furthermore, by harnessing AI as a tool for facial analysis and surfacing its underlying ontology via the visualizations, Second Look also reveals the frivolity of using AI like so. Just as we take lightly a mood ring's temperature-based algorithm for determining human emotions, so too should we take lightly AI's hidden processes for interpreting human phenomena.
+        <br>As a data visualization system, Second Look examines how an AI infers gender and sentiment in paintings in relationship to curators’ captured metadata about the paintings’ color and chronology. From this, we are able to observe how gender is represented by artists through time, procured by the Museums, and described by an AI. By using an AI as a tool for curation, in this case, as a method for annotating paintings, then surfacing its underlying ontology via Second Look’s visualizations, we are able to further observe the frivolity of using an AI like so. In particular, through showing the AI’s limitation of only “seeing” eight emotions and two genders. Just as we take lightly a mood ring's temperature-based algorithm for determining human sentiment, so too should we take lightly AI's hidden processes for interpreting human phenomena, which also includes our gender identities. And lastly, through critiquing how AI “sees” art, Second Look hopes to provoke self-reflection by asking, what is the nature of our own ontologies for inferring others’ subjective and expressive emotional and gendered states? And how does this affect the artistic representation, curation, and viewing of figurative art?
+        <br>
+        <img id="text-img" src="img/lins_royalmoodjewelry1.jpg" alt="Royal Mood Jewelry"></img>
       </h3>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-12">
-      <h2>What are the most frequent sentiments identified by AI for the given selection of portraits?</h2>
+      <h2>What are the most frequent sentiments identified by the AI for the given selection of portraits?</h2>
     </div>
   </div>
 
@@ -90,13 +93,26 @@
     </div>
   </div>
 
-<!--  <h3>-->
-<!--    (FILLER TEXT) The Harvard Art Museums collection spans approximately 250,000 objects that range from antiquity to the present time. Yet only 1,803 objects are on exhibit at the Museums at any given time. Interestingly though, while humans only see 1% of the collection, AI has seen it all. This is due to the Harvard Art Museums employing several commercial AI services to “view” and annotate the museums’ digitally archived collection. As a data visualization system, Second Look utilizes one of these services, AWS Rekognition, to analyze the gender and sentiment of faces in paintings found within the digital archive. By observing how AI infers gender and sentiment in paintings in relationship to metadata about the paintings’ color and chronology, we are able to attain new views of the collection. In particular, we are able to observe how gender is represented by artists through time, appropriated by museums, and understood by AI.-->
-<!--  </h3>-->
+  <div class="row">
+    <div class="col-md-12">
+      <h2>AI only "sees" (separately) binary genders and is most confident recognizing masculine subjects in paintings</h2>
+      <h3>
+        When AI assesses a subject’s gender, the AI provides a confidence rating for how sure it is about which gender the subject is. When AI is very confident in its gender analysis, it is most likely because it can "see" that gender’s associated attributes clearly, such as a square jaw bone for males and long hair for females. Therefore, a higher confidence rating correlates with AI recognizing greater masculinity or femininity in a subject. <br>
+        <br>
+        The rays extending beyond the outermost circumference show the frequency that the AI recognized subjects according to the presented gender scale. The frequency was determined by counting the occurrences for each (gender) confidence rating between the numbers of 0 and 100, where 0 correlates with “less masculine” or “less female” and 100 with “more masculine” or “more female”. Because the AI has not been trained to "see" mixed or non-binary genders, there are no rays extending from the top or bottom sections of the chart which represent “Both” and “Neither” gender categories respectively.
+      </h3>
+    </div>
+  </div>
+
+  <div class="row chart">
+    <div class="col-md-12">
+      <div id="genderVisRadial" class = "chart"></div>
+    </div>
+  </div>
 
   <div class="row">
     <div class="col-md-12">
-      <h2>How confident is AI in its sentiment analysis of these paintings?</h2>
+      <h2>How confident is the AI in its sentiment analysis of these paintings?</h2>
     </div>
   </div>
 
@@ -131,10 +147,6 @@
 <!--      <div class = "chart sentColLegend"></div>-->
 <!--    </div>-->
   </div>
-
-<!--  <h3>-->
-<!--    (FILLER TEXT) The Harvard Art Museums collection spans approximately 250,000 objects that range from antiquity to the present time. Yet only 1,803 objects are on exhibit at the Museums at any given time. Interestingly though, while humans only see 1% of the collection, AI has seen it all. This is due to the Harvard Art Museums employing several commercial AI services to “view” and annotate the museums’ digitally archived collection. As a data visualization system, Second Look utilizes one of these services, AWS Rekognition, to analyze the gender and sentiment of faces in paintings found within the digital archive. By observing how AI infers gender and sentiment in paintings in relationship to metadata about the paintings’ color and chronology, we are able to attain new views of the collection. In particular, we are able to observe how gender is represented by artists through time, appropriated by museums, and understood by AI.-->
-<!--  </h3>-->
 
   <div class="row">
     <div class="col-md-12">
@@ -207,16 +219,12 @@
     </div>
   </div>
 
-<!--  <h3>-->
-<!--    (FILLER TEXT) The Harvard Art Museums collection spans approximately 250,000 objects that range from antiquity to the present time. Yet only 1,803 objects are on exhibit at the Museums at any given time. Interestingly though, while humans only see 1% of the collection, AI has seen it all. This is due to the Harvard Art Museums employing several commercial AI services to “view” and annotate the museums’ digitally archived collection. As a data visualization system, Second Look utilizes one of these services, AWS Rekognition, to analyze the gender and sentiment of faces in paintings found within the digital archive. By observing how AI infers gender and sentiment in paintings in relationship to metadata about the paintings’ color and chronology, we are able to attain new views of the collection. In particular, we are able to observe how gender is represented by artists through time, appropriated by museums, and understood by AI.-->
-<!--  </h3>-->
 
-  <div class="row chart">
-    <div class="col-md-12">
+<!--  <div class="row chart">-->
+<!--    <div class="col-md-12">-->
 <!--      <div id="sentimentVisTime" class = "chart"></div>-->
-    </div>
-  </div>
-
+<!--    </div>-->
+<!--  </div>-->
 
   <!--  <div class="row">-->
   <!--    <div class="col-md-12">-->
@@ -270,6 +278,7 @@
   <script src="js/colorVisBlock.js"></script>
   <script src="js/colorMosaic.js"></script>
   <script src="js/sentColLegend.js"></script>
+  <script src="js/genderVisRadial.js"></script>
   <script src="js/sentVisTime.js"></script>
 
   <script src="js/main.js"></script>
