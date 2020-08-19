@@ -3,19 +3,19 @@ var marginMosaic = marginPack;
 var widthMosaic = 700 - marginMosaic.left - marginMosaic.right;
 var heightMosaic = 550 - marginMosaic.top - marginMosaic.bottom;
 
-var svgMosaic = d3.select("#colorVisMosaic").append("svg")
-    .attr("viewBox", "0 0 " + (widthMosaic + marginMosaic.left + marginMosaic.right) + " " +
-        (heightMosaic + marginMosaic.top + marginMosaic.bottom) + "")
-    .append("g")
-    .attr("class", "chart")
-    .attr("transform", "translate(" + marginMosaic.left + "," + marginMosaic.top + ")");
-
 // var svgMosaic = d3.select("#colorVisMosaic").append("svg")
-//     .attr("width", widthMosaic + marginMosaic.left + marginMosaic.right)
-//     .attr("height", heightMosaic + marginMosaic.top + marginMosaic.bottom)
+//     .attr("viewBox", "0 0 " + (widthMosaic + marginMosaic.left + marginMosaic.right) + " " +
+//         (heightMosaic + marginMosaic.top + marginMosaic.bottom) + "")
 //     .append("g")
 //     .attr("class", "chart")
 //     .attr("transform", "translate(" + marginMosaic.left + "," + marginMosaic.top + ")");
+
+var svgMosaic = d3.select("#colorVisMosaic").append("svg")
+    .attr("width", widthMosaic + marginMosaic.left + marginMosaic.right)
+    .attr("height", heightMosaic + marginMosaic.top + marginMosaic.bottom)
+    .append("g")
+    .attr("class", "chart")
+    .attr("transform", "translate(" + marginMosaic.left + "," + marginMosaic.top + ")");
 
 // Scales
 var xScaleMos = d3.scaleBand()

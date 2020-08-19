@@ -34,6 +34,7 @@ label.title, form {
 }
 .radio {
   display: block;
+  /*display: inline;*/
   position: relative;
   cursor: pointer;
   padding: 2px;
