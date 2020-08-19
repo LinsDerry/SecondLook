@@ -124,16 +124,15 @@ function sentimentVisConcentric(data) {
         // "Gender: Female" user selection
         if (d.gender.Value === "Female") {
             percent = (femaleSentMap[d.emotion.Value] / female.length * 100).toFixed(1);
-            return "<span class = tip>" + percent + "% of <em>FEMALE </em>paintings are seen as " +
-                "<em>" + d.emotion.Value + "</em>" + "</span> by AI " +
-                "with an average confidence rating of " + average(d.emotion.Value, "Female") + "%</span>";
+            return "<span class = tip>" + percent + "% of FEMALE paintings are seen as "
+                + d.emotion.Value + "</span> with the average confidence rating of " + average(d.emotion.Value, "Female") + "%</span>";
         }
         // "Gender: Male" user selection
         if (d.gender.Value === "Male") {
             percent = (maleSentMap[d.emotion.Value] / male.length * 100).toFixed(1);
-            return "<span class = tip>" + percent + "% of <em>MALE </em>paintings are seen as " +
-                "<em>" + d.emotion.Value + "</em>" + "</span> by AI " +
-                "with an average confidence rating of " + average(d.emotion.Value, "Male") + "%</span>";
+            return "<span class = tip>" + percent + "% of MALE paintings are seen as "
+                + d.emotion.Value + "</span> with the average confidence rating of " + average(d.emotion.Value, "Male") +
+                "%</span>";
         }
     });
 

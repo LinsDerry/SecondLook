@@ -27,13 +27,21 @@ var gradientCol = d3.scaleLinear()
 var normalize = d3.scaleLinear()
     .range([0, 1]);
 
+//Initialize tool-tip for interaction with bars
+var tipG = d3.tip()
+    .attr("class", "d3-tip")
+    .offset([-20, 0]);
+
+//Call tool-tip
+svgRadial.call(tipG);
+
 function genderVisRadial(fem, mal) {
 
     var width = widthRadial;
     var height = heightRadial;
 
     // Outer doughnut
-    var inRadius = width / 3;
+    var inRadius = width / 3.1;
     var outRadius = inRadius * 1.1;
 
     // Outer doughnut
@@ -48,8 +56,8 @@ function genderVisRadial(fem, mal) {
             return 1;
         });
     var innerPie = d3.pie()
-        .startAngle(-45 * Math.PI/180)
-        .endAngle(-45 * Math.PI/180 + 2*Math.PI)
+        .startAngle(-45 * Math.PI / 180)
+        .endAngle(-45 * Math.PI / 180 + 2 * Math.PI)
         .value(function (d) { // Make arcs all equal
             return d.value;
         })
@@ -86,7 +94,9 @@ function genderVisRadial(fem, mal) {
         .attr("fill", function (d, i) {
             return gradientCol(i);
         })
-        .attr("d", arc);
+        .attr("d", arc)
+        .on("mouseover", tipG.show)
+        .on("mouseout", tipG.hide);
 
     //Draw inner doughnut for labels
     var labelArcs = svgRadial.selectAll("g.labelArcs")
@@ -101,17 +111,30 @@ function genderVisRadial(fem, mal) {
             return d.data.fill;
         })
         .attr("d", labelArc)
-        .each(function(d,i) {
+        .each(function (d, i) {
+
             // Code snippet from www.visualcinnamon.com tutorial
             var firstArcSection = /(^.+?)L/;
-            var newArc = firstArcSection.exec( d3.select(this).attr("d") )[1];
-            newArc = newArc.replace(/,/g , " ");
+            var newArc = firstArcSection.exec(d3.select(this).attr("d"))[1];
+            newArc = newArc.replace(/,/g, " ");
+
+            // Flip bottom label NEITHER so it is not upside-down or backwards
+            if (d.data.label === "NEITHER") {
+                var startLoc = /M(.*?)A/;
+                var middleLoc = /A(.*?)0 0 1/;
+                var endLoc = /0 0 1 (.*?)$/;
+                var newStart = endLoc.exec(newArc)[1];
+                var newEnd = startLoc.exec(newArc)[1];
+                var middleSec = middleLoc.exec(newArc)[1];
+
+                newArc = "M" + newStart + "A" + middleSec + "0 0 0 " + newEnd;
+            }
 
             /* Create an invisible arc that the text can flow along
             (only the outer curve of pie slice) */
             svgRadial.append("path")
                 .attr("class", "hiddenDonutArcs")
-                .attr("id", "arc_"+i)
+                .attr("id", "arc_" + i)
                 .attr("d", newArc)
                 .style("fill", "none");
         });
@@ -123,36 +146,61 @@ function genderVisRadial(fem, mal) {
         .data(sections)
         .enter().append("text")
         .attr("class", "radialLabel")
-        .attr("dy", -7)
+        .attr("dy", function (d) {
+            if (d.label === "NEITHER") {
+                return 18;
+            } else {
+                return -6;
+            }
+        })
         .append("textPath")
-        .attr("xlink:href",function(d,i){return "#arc_"+ i;})
+        .attr("xlink:href", function (d, i) {
+            return "#arc_" + i;
+        })
         .attr("text-anchor", "middle")
-        .attr("startOffset","50%")
+        .attr("startOffset", "50%")
         .style("font-size", function (d) {
             return d.size;
         })
         .style("font-weight", function (d) {
             return d.weight;
         })
-        .text(function(d){
+        .text(function (d) {
             return d.label;
         });
+
+    svgRadial.append("circle")
+        .attr("class", "cir")
+        .attr("id", "zero-rim")
+        .attr("cx", width / 2)
+        .attr("cy", height / 2)
+        .attr("r", outRadius)
+        .style("fill", "none")
+        .style("stroke", "white")
+        .style("stroke-width", 0.1);
+
+    // Update tool-tip display information
+    tipG.html(function (d) {
+        var percent = (d.data.frequency / (fem.length + mal.length) * 100).toFixed(1);
+
+        if (d.data.gender === "FEMALE" || d.data.gender === "MALE") {
+            if (d.data.frequency !== 0) {
+                return "<span class = tip>" + percent + "% of paintings are seen as " + d.data.gender + " with a " + d.data.confidence + "% confidence rating</span>";
+            } else {
+                return "<span class = tip>There are no paintings seen as " + d.data.gender + " with a " + d.data.confidence + "% confidence rating</span>";
+            }
+        }
+        if (d.data.gender === "NON-BINARY") {
+            return "<span class = tip>There are no paintings seen as NON-BINARY</span>";
+        }
+    });
 }
 
 /* orderSlices returns a new array for passing to d3.pie(). This function divides the circle into 4 sections -
 * (starting at 12:00) "Both", "Female", "Neither (Non-Binary)", "Male". Each section has 100 pie slices that
-* coincide with AI's 0-100 gender-assignment confidence ratings. This is for inner doughnut chart. */
+* coincide with AI's 1-100 gender confidence ratings. This is for inner doughnut chart. */
 function orderSlices(fem, mal) {
     var slices = [];
-
-    // Sort fem descending and mal ascending to match clockwise orientation of chart
-    fem.sort(function (a, b) {
-        return b.gender.Confidence - a.gender.Confidence;
-    });
-    mal.sort(function (a, b) {
-        return a.gender.Confidence - b.gender.Confidence;
-    });
-
     var femMap = makeFrequencyMap(fem);
     var malMap = makeFrequencyMap(mal);
 
@@ -161,34 +209,46 @@ function orderSlices(fem, mal) {
     // First half of "Both" section
     for (var i = 0; i < 50; i++) {
         obj = {};
+        obj.gender = "NON-BINARY";
+        obj.confidence = 0;
         obj.frequency = 0;
         slices.push(obj);
     }
     // "Female" section
-    for (var j = 1; j <= 100; j++) {
+    // Note that female is descending and male ascending to match clockwise orientation of chart
+    for (var j = 100; j >= 1; j--) {
         obj = {};
+        obj.gender = "FEMALE";
+        obj.confidence = j;
         obj.frequency = femMap[j];
         slices.push(obj);
     }
     // "Non-binary" section
     for (var n = 0; n < 100; n++) {
         obj = {};
+        obj.gender = "NON-BINARY";
+        obj.confidence = 0;
         obj.frequency = 0;
         slices.push(obj);
     }
     // "Male" section in circle
     for (var k = 1; k <= 100; k++) {
         obj = {};
+        obj.gender = "MALE";
+        obj.confidence = k;
         obj.frequency = malMap[k];
         slices.push(obj);
     }
     // Second half of "Both" section
     for (var m = 0; m < 50; m++) {
         obj = {};
+        obj.gender = "NON-BINARY";
+        obj.confidence = 0;
         obj.frequency = 0;
         slices.push(obj);
     }
 
+    console.log(slices);
     return slices;
 }
 

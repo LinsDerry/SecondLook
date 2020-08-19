@@ -72,7 +72,6 @@ function sentimentVisPack(data) {
         })
         .style("stroke-width", 0.25);
 
-
     var newCircles = updateCir.enter()
         .append("circle")
         .attr("class", "cir")

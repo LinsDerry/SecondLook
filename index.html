@@ -16,13 +16,16 @@
 <div class="container-fluid">
 
   <div class="row" id="header-row">
-    <div class="col-md-12">
-      <h1>Second Look: gender and sentiment <em>on view</em> at the museum </h1>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h1>Second Look: Gender and sentiment <em>on view</em> at the museum </h1>
     </div>
+    <div class="col-md-2"></div>
   </div>
 
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
       <img class="text-img" src="img/haminterior.jpeg"></img>
       <h3>
         Not unlike animal forms of intelligence, artificial intelligence relies upon pattern
@@ -42,12 +45,18 @@
 <!--        <img id="text-img" src="img/lins_royalmoodjewelry1.jpg" alt="Royal Mood Jewelry"></img>-->
       </h3>
     </div>
+    <div class="col-md-2"></div>
   </div>
 
   <div class="row">
-    <div class="col-md-12">
-      <h2>What are the most frequent sentiments identified by the AI for the given selection of portraits?</h2>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h2>What are the most frequent sentiments identified by AI for the given selection of portraits?</h2>
+      <h3>
+        When AI assesses a subject’s sentiment, it provides confidence ratings for the following emotions: happy, sad, calm, angry, disgusted, confused, surprised, and fear. Interested in revealing at a high level the sentiment of the portrait collection, this visualization groups the paintings according to their most dominant emotion or emotion with the greatest confidence rating. The size of each circle is relative to that confidence rating, so a “SAD” painting with a 92% confidence score for that emotion will be larger than a “SAD” painting with a similar score of 44%. As can be seen, the visualization reveals that the portrait collection is predominately “CALM” according to AI.
+      </h3>
     </div>
+    <div class="col-md-2"></div>
   </div>
 
   <div class="row chart">
@@ -61,15 +70,15 @@
       </label>
       <label class="title"><strong>Sentiment:</strong>
         <form>
-          <label class="radio all_sent" style="color:#343a40;"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
-          <label class="radio HAPPY sent" style="color:#fff853;"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
-          <label class="radio SAD sent" style="color:#2a3b90;"><input type="radio" name="sentiment" value="SAD"> Sad</label>
-          <label class="radio CALM sent" style="color:#AFEEEE;"><input type="radio" name="sentiment" value="CALM"> Calm</label>
-          <label class="radio ANGRY sent" style="color:#7a2536;"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
-          <label class="radio DISGUSTED sent" style="color:#216000;"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
-          <label class="radio CONFUSED sent" style="color:#ffcc99;"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
-          <label class="radio SURPRISED sent" style="color:#ac128f;"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
-          <label class="radio FEAR sent" style="color:#1a1a1a;"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
+          <label class="radio all_sent"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
+          <label class="radio HAPPY sent"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
+          <label class="radio SAD sent"><input type="radio" name="sentiment" value="SAD"> Sad</label>
+          <label class="radio CALM sent"><input type="radio" name="sentiment" value="CALM"> Calm</label>
+          <label class="radio ANGRY sent"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
+          <label class="radio DISGUSTED sent"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
+          <label class="radio CONFUSED sent"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
+          <label class="radio SURPRISED sent"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
+          <label class="radio FEAR sent"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
         </form>
       </label>
     </div>
@@ -104,26 +113,12 @@
   </div>
 
   <div class="row">
-    <div class="col-md-12">
-      <h2>AI only "sees" (separately) binary genders and is most confident recognizing masculine subjects in paintings</h2>
-<!--      <h3>-->
-<!--        When AI assesses a subject’s gender, the AI provides a confidence rating for how sure it is about which gender the subject is. When AI is very confident in its gender analysis, it is most likely because it can "see" that gender’s associated attributes clearly, such as a square jaw bone for males and long hair for females. Therefore, a higher confidence rating correlates with AI recognizing greater masculinity or femininity in a subject. <br>-->
-<!--        <br>-->
-<!--        The rays extending beyond the outermost circumference show the frequency that the AI recognized subjects according to the presented gender scale. The frequency was determined by counting the occurrences for each (gender) confidence rating between the numbers of 0 and 100, where 0 correlates with “less masculine” or “less female” and 100 with “more masculine” or “more female”. Because the AI has not been trained to "see" mixed or non-binary genders, there are no rays extending from the top or bottom sections of the chart which represent “Both” and “Neither” gender categories respectively.-->
-<!--      </h3>-->
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h2>How confident is AI in its sentiment analysis of these paintings?</h2>
+      <h3>Each circle represents a painting; circle sizes are relative to AI’s confidence that the painting portrays the given sentiment. Because the circles are drawn concentrically, the darker areas or rims help to reveal the average confidence scores for each grouping. For example, the overall large size of the “MALE-CALM” grouping and its darkened outer rim reveals that AI consistently classifies “MALE” subjects in paintings as “CALM” with a high degree of confidence. By hovering over the groupings, exact statistics can be retrieved.</h3>
     </div>
-  </div>
-
-  <div class="row chart">
-    <div class="col-md-12">
-      <div id="genderVisRadial" class = "chart"></div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-12">
-      <h2>How confident is the AI in its sentiment analysis of these paintings?</h2>
-    </div>
+    <div class="col-md-2"></div>
   </div>
 
   <div class="row chart">
@@ -137,15 +132,15 @@
       </label>
       <label class="title"><strong>Sentiment:</strong>
         <form>
-          <label class="radio all_sent" style="color:#343a40;"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
-          <label class="radio HAPPY sent" style="color:#fff853;"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
-          <label class="radio SAD sent" style="color:#2a3b90;"><input type="radio" name="sentiment" value="SAD"> Sad</label>
-          <label class="radio CALM sent" style="color:#AFEEEE;"><input type="radio" name="sentiment" value="CALM"> Calm</label>
-          <label class="radio ANGRY sent" style="color:#7a2536;"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
-          <label class="radio DISGUSTED sent" style="color:#216000;"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
-          <label class="radio CONFUSED sent" style="color:#ffcc99;"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
-          <label class="radio SURPRISED sent" style="color:#ac128f;"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
-          <label class="radio FEAR sent" style="color:#1a1a1a;"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
+          <label class="radio all_sent"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
+          <label class="radio HAPPY sent"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
+          <label class="radio SAD sent"><input type="radio" name="sentiment" value="SAD"> Sad</label>
+          <label class="radio CALM sent"><input type="radio" name="sentiment" value="CALM"> Calm</label>
+          <label class="radio ANGRY sent"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
+          <label class="radio DISGUSTED sent"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
+          <label class="radio CONFUSED sent"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
+          <label class="radio SURPRISED sent"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
+          <label class="radio FEAR sent"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
         </form>
       </label>
     </div>
@@ -153,15 +148,40 @@
     <div class="col-md-10">
       <div id="sentimentVisConcentric" class="chart"></div>
     </div>
-<!--    <div class="col-md-2">-->
-<!--      <div class = "chart sentColLegend"></div>-->
-<!--    </div>-->
+    <!--    <div class="col-md-2">-->
+    <!--      <div class = "chart sentColLegend"></div>-->
+    <!--    </div>-->
   </div>
 
   <div class="row">
-    <div class="col-md-12">
-      <h2>What are the most prominent colors for specific genders and sentiments?</h2>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h2>AI only "sees" (separately) binary genders</h2>
+      <h3>
+        When AI assesses a subject’s gender, it provides a confidence rating for how sure it is about which gender the subject is. When AI is very confident in its gender analysis, it is most likely because it "sees" that gender’s associated attributes clearly, such as a square jaw bone for males and long hair for females. Therefore, a higher confidence rating correlates with AI recognizing greater masculinity or femininity in a subject.
+        <br>
+        <br>
+        The double ring circumscribed by the white circle visualize the different relationships between the gender categories of female, male, both, and neither, which are umbrella terms for an array of gender identities. The rays extending beyond the white circle show the frequency that AI recognized a subject’s gender for a given confidence rating between 1% and 100%. Reflecting the logic of the double ring, 1% confidence correlates with “less masculine” or “less feminine” and 100% confidence correlates with “more masculine” or “more feminine” hence the layout of the rays. Because the AI used here has not been trained to "see" non-binary genders, there are no rays extending from the top or bottom sections of the chart.
+      </h3>
     </div>
+    <div class="col-md-2"></div>
+  </div>
+
+  <div class="row chart">
+    <div class="col-md-12">
+      <div id="genderVisRadial" class = "chart"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <h2>What are the most prominent colors for specific genders and sentiments?</h2>
+      <h3>
+        Interested in revealing at a high level the colors associated with a given gender and/or emotion in the portrait collection, this visualization first observes each painting’s most dominant color, then creates a frequency chart in the form of a color bar. By clicking on one of the colors within the bar, the mosaic chart below the bar is updated with images of the paintings whose dominant color matches the selected color. By selecting “HUE” from the lefthand filter menu, all of the above can be replicated using the dominant hues of the paintings.
+      </h3>
+    </div>
+    <div class="col-md-2"></div>
   </div>
 
   <div class="row chart">
@@ -188,15 +208,15 @@
         </label>
         <label class="title"><strong>Sentiment:</strong>
           <form>
-            <label class="radio all_sent" style="color:#343a40;"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
-            <label class="radio HAPPY sent" style="color:#fff853;"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
-            <label class="radio SAD sent" style="color:#2a3b90;"><input type="radio" name="sentiment" value="SAD"> Sad</label>
-            <label class="radio CALM sent" style="color:#AFEEEE;"><input type="radio" name="sentiment" value="CALM"> Calm</label>
-            <label class="radio ANGRY sent" style="color:#7a2536;"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
-            <label class="radio DISGUSTED sent" style="color:#216000;"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
-            <label class="radio CONFUSED sent" style="color:#ffcc99;"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
-            <label class="radio SURPRISED sent" style="color:#ac128f;"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
-            <label class="radio FEAR sent" style="color:#1a1a1a;"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
+            <label class="radio all_sent"><input type="radio" name="sentiment" value="all_sent" checked> All</label>
+            <label class="radio HAPPY sent"><input type="radio" name="sentiment" value="HAPPY"> Happy</label>
+            <label class="radio SAD sent"><input type="radio" name="sentiment" value="SAD"> Sad</label>
+            <label class="radio CALM sent"><input type="radio" name="sentiment" value="CALM"> Calm</label>
+            <label class="radio ANGRY sent"><input type="radio" name="sentiment" value="ANGRY"> Angry</label>
+            <label class="radio DISGUSTED sent"><input type="radio" name="sentiment" value="DISGUSTED"> Disgusted</label>
+            <label class="radio CONFUSED sent"><input type="radio" name="sentiment" value="CONFUSED"> Confused</label>
+            <label class="radio SURPRISED sent"><input type="radio" name="sentiment" value="SURPRISED"> Surprised</label>
+            <label class="radio FEAR sent"><input type="radio" name="sentiment" value="FEAR"> Fear</label>
           </form>
         </label>
       </div>
@@ -228,51 +248,6 @@
       </div>
     </div>
   </div>
-
-
-<!--  <div class="row chart">-->
-<!--    <div class="col-md-12">-->
-<!--      <div id="sentimentVisTime" class = "chart"></div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-  <!--  <div class="row">-->
-  <!--    <div class="col-md-12">-->
-  <!--      <h3>What kinds of faces are the most/least seen at the museums?</h3>-->
-  <!--    </div>-->
-  <!--  </div>-->
-
-  <!--  <div id="activity-chart" class = "chart">-->
-  <!--    <h2>Activity Chart</h2>-->
-  <!--  </div>-->
-
-  <!--  <div class="row">-->
-  <!--    <div class="col-md-12">-->
-  <!--      <p>-->
-  <!--        Playing off the theme of AI and curatorial practice, we hope to use our revelations to then ask, how might we surface some of the underutilized pieces — ones that people almost never get to see? For example, given a human-curated collection, how might an AI curate a similar selected exhibition or how might it extend the exhibition further by using underutilized pieces? And in the same vein, how might we filter for dissimilarity when extending our hypothetical exhibition so that outlier faces are illuminated?-->
-  <!--      </p>-->
-  <!--    </div>-->
-  <!--  </div>-->
-
-  <!--  <div class="row">-->
-  <!--    <div class="col-md-12">-->
-  <!--      <h3>How might an AI extend a human-curated exhibition by using similar and dissimilar pieces that are underutilized?</h3>-->
-  <!--    </div>-->
-  <!--  </div>-->
-
-  <!--  <div id="network-chart" class = "chart">-->
-  <!--    <h2>Network Chart</h2>-->
-  <!--  </div>-->
-
-  <!--  <div class="row">-->
-  <!--    <div class="col-md-12">-->
-  <!--      <h3>-->
-  <!--        Through choosing to explore the domain of faces in this project, we also hope to raise questions about the ethics of algorithmic facial analysis. Can AI accurately infer the emotional interiority of people? What are the implications for AI misinterpreting people’s emotional states or those portrayed in artworks?-->
-  <!--      </h3>-->
-  <!--    </div>-->
-  <!--  </div>-->
-
-  <!--</div>-->
 
   <!-- Load JS libraries -->
   <script src="js/jquery.min.js"></script>
