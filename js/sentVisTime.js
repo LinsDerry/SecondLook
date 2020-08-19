@@ -1,3 +1,5 @@
+/* NOT using this code for anything right now */
+
 // SVG drawing areas
 var marginTime = {top: 25, right: 35, bottom: 25, left: 35};
 var widthTime = 700 - marginTime.left - marginTime.right;

@@ -1,13 +1,21 @@
 // SVG drawing area
 var marginBlock = marginPack;
-var widthBlock = 1500;
+var widthBlock = 1150;
 var heightBlock = 200 - marginBlock.top - marginBlock.bottom;
+
 var svgBlock = d3.select("#colorVisBlock").append("svg")
-    .attr("width", widthBlock + marginBlock.left + marginBlock.right)
-    .attr("height", heightBlock + marginBlock.top + marginBlock.bottom)
+    .attr("viewBox", "0 0 " + (widthBlock + marginBlock.left + marginBlock.right) + " " +
+        (heightBlock + marginBlock.top + marginBlock.bottom) + "")
     .append("g")
     .attr("class", "chart")
     .attr("transform", "translate(" + marginBlock.left + "," + marginBlock.top + ")");
+
+// var svgBlock = d3.select("#colorVisBlock").append("svg")
+//     .attr("width", widthBlock + marginBlock.left + marginBlock.right)
+//     .attr("height", heightBlock + marginBlock.top + marginBlock.bottom)
+//     .append("g")
+//     .attr("class", "chart")
+//     .attr("transform", "translate(" + marginBlock.left + "," + marginBlock.top + ")");
 
 /* ? Can't pass data from arguments directly bcs it doesn't update inside enterRec with each
 new call of colorVisBlock. For instance, if female is passed as data next time, it still passes

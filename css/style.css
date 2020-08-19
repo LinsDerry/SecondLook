@@ -15,9 +15,9 @@ body {
   padding: 10px;
   margin: 10px;
 }
+
 #genderVisRadial {
   background: #bfbfbf;
-  fill: black;
 }
 .menu {
   text-align: left;
@@ -25,20 +25,19 @@ body {
   margin-left: 0;
 }
 label.title, form {
-  padding: 3px;
+  padding: 8px;
   margin: 8px;
-  background: #bfbfbf;
-  font-weight: 500;
+  background: none; /* Remove to match background of image details rectangle */
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.06em;
 }
 .radio {
   display: block;
-  /*display: inline;*/
   position: relative;
   cursor: pointer;
-  text-transform: uppercase;
-  padding: 2px 0 2px 0;
-  margin: 2px 0 2px 0;
-  font-weight: 900;
+  padding: 2px;
+  margin: 2px;
 }
 #colorVisWheel {
   margin: 5px;
@@ -97,18 +96,15 @@ h1, h2, h3, .radialLabel {
 h1 {
   margin: 35px;
   margin-bottom: 5px;
-  /*margin: 25px 200px 5px 200px;*/
 }
 h2 {
   margin: 35px;
   margin-bottom: 10px;
-  /*margin: 50px 300px 10px 300px;*/
   padding: 35px 15px 10px 15px;
   font-size: 33px;
 }
 h3 {
   margin: 35px;
-  /*margin: 35px 300px 35px 300px;*/
   font-size: 16px;
   text-align: justify;
   line-height: 1.7;
@@ -145,34 +141,6 @@ h3 {
   border-radius: 8px;
   pointer-events: none;
 }
-
-/*mark, .all_sent {*/
-/*  background-color: white;*/
-/*}*/
-/*mark, .HAPPY {*/
-/*  background-color: #fff853;*/
-/*}*/
-/*mark, .SAD {*/
-/*  background-color: #2a3b90;*/
-/*}*/
-/*mark, .CALM {*/
-/*  background-color: #AFEEEE;*/
-/*}*/
-/*mark, .ANGRY {*/
-/*  background-color: #7a2536;*/
-/*}*/
-/*mark, .DISGUSTED {*/
-/*  background-color: #216000;*/
-/*}*/
-/*mark, .CONFUSED {*/
-/*  background-color: #ffcc99;*/
-/*}*/
-/*mark, .SURPRISED {*/
-/*  background-color: #ac128f;*/
-/*}*/
-/*mark, .FEAR {*/
-/*  background-color: #1a1a1a;*/
-/*}*/
 
 
 

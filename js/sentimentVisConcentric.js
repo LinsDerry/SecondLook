@@ -2,12 +2,20 @@
 var marginConcentric = marginPack;
 var widthConcentric = 1100 - marginConcentric.left - marginConcentric.right;
 var heightConcentric = 500 - marginConcentric.top - marginConcentric.bottom;
+
 var svgConcentric = d3.select("#sentimentVisConcentric").append("svg")
-    .attr("width", widthConcentric + marginConcentric.left + marginConcentric.right)
-    .attr("height", heightConcentric + marginConcentric.top + marginConcentric.bottom)
+    .attr("viewBox", "0 0 " + (widthConcentric + marginConcentric.left + marginConcentric.right) + " " +
+        (heightConcentric + marginConcentric.top + marginConcentric.bottom) + "")
     .append("g")
     .attr("class", "chart")
     .attr("transform", "translate(" + marginConcentric.left * 2 + "," + marginConcentric.top + ")");
+
+// var svgConcentric = d3.select("#sentimentVisConcentric").append("svg")
+//     .attr("width", widthConcentric + marginConcentric.left + marginConcentric.right)
+//     .attr("height", heightConcentric + marginConcentric.top + marginConcentric.bottom)
+//     .append("g")
+//     .attr("class", "chart")
+//     .attr("transform", "translate(" + marginConcentric.left * 2 + "," + marginConcentric.top + ")");
 
 //Scales
 var xScaleCon = d3.scalePoint()

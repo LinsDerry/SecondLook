@@ -2,12 +2,20 @@
 var marginPack = {top: 25, right: 35, bottom: 25, left: 35};
 var widthPack = 700 - marginPack.left - marginPack.right;
 var heightPack = 700 - marginPack.top - marginPack.bottom;
+
 var svgPack = d3.select("#sentimentVisPack").append("svg")
-    .attr("width", widthPack + marginPack.left + marginPack.right)
-    .attr("height", heightPack + marginPack.top + marginPack.bottom)
+    .attr("viewBox", "0 0 " + (widthPack + marginPack.left + marginPack.right) + " " +
+        (heightPack + marginPack.top + marginPack.bottom) + "")
     .append("g")
     .attr("class", "chart")
     .attr("transform", "translate(" + marginPack.left + "," + marginPack.top / 2 + ")");
+
+// var svgPack = d3.select("#sentimentVisPack").append("svg")
+//     .attr("width", widthPack + marginPack.left + marginPack.right)
+//     .attr("height", heightPack + marginPack.top + marginPack.bottom)
+//     .append("g")
+//     .attr("class", "chart")
+//     .attr("transform", "translate(" + marginPack.left + "," + marginPack.top / 2 + ")");
 
 //Append g element for text (assigned same classes as sentimentVisConcentric g x-axis/text elements so style matches)
 svgPack.append("g")

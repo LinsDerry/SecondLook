@@ -2,12 +2,20 @@
 var marginRadial = {top: 65, right: 55, bottom: 45, left: 55};
 var widthRadial = 800 - marginRadial.left - marginRadial.right;
 var heightRadial = 700 - marginRadial.top - marginRadial.bottom;
+
 var svgRadial = d3.select("#genderVisRadial").append("svg")
-    .attr("width", widthRadial + marginRadial.left + marginRadial.right)
-    .attr("height", heightRadial + marginRadial.top + marginRadial.bottom)
+    .attr("viewBox", "0 0 " + (widthRadial + marginRadial.left + marginRadial.right) + " " +
+        (heightRadial + marginRadial.top + marginRadial.bottom) + "")
     .append("g")
     .attr("class", "chart")
     .attr("transform", "translate(" + marginRadial.left + "," + (marginRadial.top * 1.3) + ")");
+
+// var svgRadial = d3.select("#genderVisRadial").append("svg")
+//     .attr("width", widthRadial + marginRadial.left + marginRadial.right)
+//     .attr("height", heightRadial + marginRadial.top + marginRadial.bottom)
+//     .append("g")
+//     .attr("class", "chart")
+//     .attr("transform", "translate(" + marginRadial.left + "," + (marginRadial.top * 1.3) + ")");
 
 // Color scale
 var gradientCol = d3.scaleLinear()

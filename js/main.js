@@ -1,4 +1,3 @@
-
 /* The following arrays will be used to store the Harvard Art Museums' (HAM) data in ways that are most
 helpful for constructing the visualizations; these are global variables, so therefore, I am describing
 them here: */
@@ -167,10 +166,10 @@ function sentimentColorKey() {
     var key = [];
     key["DISGUSTED"] = "#216000";
     key["SAD"] = "#2a3b90";
-    key["CONFUSED"] = "#ffcc99";
+    key["CONFUSED"] = "#ffb366"; //"#ffcc99";
     key["ANGRY"] = "#7a2536";
-    key["CALM"] = "#AFEEEE";
-    key["HAPPY"] = "#fff853";
+    key["CALM"] = "#9c9ffc"; //"#AFEEEE";
+    key["HAPPY"] = "#ff6b00"; //"#fff853";
     key["SURPRISED"] = "#ac128f";
     key["FEAR"] = "#1a1a1a";
 
@@ -347,7 +346,7 @@ function sentRadio(value) {
                 });
             }
             if (!includeEmotion) {
-                result[k].style.color = "#e5e5e5";
+                result[k].style.color = "#b2b2b2";
             } else {
                 result[k].style.color = sentColKey[sent];
             }
@@ -386,14 +385,14 @@ function sentRadio(value) {
             result[i].classList.forEach(function (d) {
                 if (d === "female") {
                     if (!includeFemale) {
-                        result[i].style.color = "#e5e5e5";
+                        result[i].style.color = "#b2b2b2";
                     } else {
                         result[i].style.color = "#343a40";
                     }
                 }
                 if (d === "male") {
                     if (!includeMale) {
-                        result[i].style.color = "#e5e5e5";
+                        result[i].style.color = "#b2b2b2";
                     } else {
                         result[i].style.color = "#343a40";
                     }
@@ -548,5 +547,7 @@ function updateRadioInterfaces(value) {
         buttons[i].control.checked = true;
     }
 }
+
+
 
 
