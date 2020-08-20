@@ -1,13 +1,15 @@
 body {
-  margin-top: 50px;
-  margin-bottom: 100px;
   font-family: Suisse Regular,sans-serif;
   color: #343a40;
   text-align: center;
 }
-#header-row {
-  padding: 25px;
-  margin: 25px;
+#mobile h2 {
+  margin: 50px;
+  padding: 10px;
+  border-radius: 25px;
+  border: 1px solid #F02D3A;
+  background: #F8F8F8;
+  text-align: center;
 }
 .art-object-details, img {
   padding: 15px;
@@ -90,15 +92,11 @@ td {
 #gender, #gender-2 {
   padding-bottom: 8px;
 }
-h1, h2, h3, .radialLabel {
+h2, h3, .radialLabel {
   text-align: center;
   letter-spacing: 0.02em;
   color: black;
   font-weight: 200;
-}
-h1 {
-  margin: 35px;
-  margin-bottom: 5px;
 }
 h2 {
   margin: 35px;
