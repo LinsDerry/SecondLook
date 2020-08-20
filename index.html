@@ -52,7 +52,7 @@
     <div class="col-md-8">
       <h2>What are the most frequent sentiments identified by AI for the given selection of portraits?</h2>
       <h3>
-        When AI assesses a subject’s sentiment, it provides confidence ratings for the following emotions: happy, sad, calm, angry, disgusted, confused, surprised, and fear. Interested in revealing at a high level the sentiment of the portrait collection, this visualization groups the paintings according to their most dominant emotion or emotion with the greatest confidence rating. The size of each circle is relative to that confidence rating, so a “SAD” painting with a 92% confidence score for that emotion will be larger than a “SAD” painting with a similar score of 44%. As can be seen, the visualization reveals that the portrait collection is predominately “CALM” according to AI.
+        When AI assesses a subject’s sentiment, it provides confidence ratings for the following emotions: happy, sad, calm, angry, disgusted, confused, surprised, and fear. Interested in revealing at a high level the sentiment of the portrait collection, the below visualization groups the paintings according to their most dominant emotion or emotion with the greatest confidence rating. The size of each circle is relative to that confidence rating, so a “SAD” painting with a 92% confidence score for that emotion will be larger than a “SAD” painting with a similar score of 44%. As can be seen, this visualization reveals that the portrait collection is predominately “CALM” according to AI.
       </h3>
     </div>
     <div class="col-md-2"></div>
@@ -135,7 +135,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
       <h2>How confident is AI in its sentiment analysis of these paintings?</h2>
-      <h3>Each circle represents a painting; circle sizes are relative to AI’s confidence that the painting portrays the given sentiment. Because the circles are drawn concentrically, the darker areas or rims help to reveal the average confidence scores for each grouping. For example, the overall large size of the “MALE-CALM” grouping and its darkened outer rim reveals that AI consistently classifies “MALE” subjects in paintings as “CALM” with a high degree of confidence. By hovering over the groupings, exact statistics can be retrieved.</h3>
+      <h3>Each circle represents a painting; circle sizes are relative to AI’s confidence that the painting portrays the given sentiment. Because the circles are drawn concentrically, the darker areas or rims help to reveal the average confidence scores for each grouping. For example, the overall large size of the “MALE-CALM” grouping and its darkened outer rim reveals that AI consistently classifies “MALE” subjects in paintings as “CALM” with a high degree of confidence. By hovering over the groupings, related statistics can be retrieved.</h3>
     </div>
     <div class="col-md-2"></div>
   </div>
@@ -180,16 +180,18 @@
         When AI assesses a subject’s gender, it provides a confidence rating for how sure it is about which gender the subject is. When AI is very confident in its gender analysis, it is most likely because it "sees" that gender’s associated attributes clearly, such as a square jaw bone for males and long hair for females. Therefore, a higher confidence rating correlates with AI recognizing greater masculinity or femininity in a subject.
         <br>
         <br>
-        The double ring circumscribed by the white circle visualize the different relationships between the gender categories of female, male, both, and neither, which are umbrella terms for an array of gender identities. The rays extending beyond the white circle show the frequency that AI recognized a subject’s gender for a given confidence rating between 1% and 100%. Reflecting the logic of the double ring, 1% confidence correlates with “less masculine” or “less feminine” and 100% confidence correlates with “more masculine” or “more feminine” hence the layout of the rays. Because the AI used here has not been trained to "see" non-binary genders, there are no rays extending from the top or bottom sections of the chart.
+        The double ring circumscribed by the white circle visualize the different relationships between the gender categories of female, male, both, and neither, which are umbrella terms for an array of gender identities. The rays extending beyond the white circle show the frequency that AI recognizes a subject’s gender for a given confidence rating between 1% and 100%. Reflecting the logic of the double ring, a 1% confidence correlates with “less masculine” or “less feminine” and a 100% confidence correlates with “more masculine” or “more feminine” hence the layout of the rays. Because the AI used here has not been trained to "see" non-binary genders, there are no rays extending from the top or bottom sections of the chart.
       </h3>
     </div>
     <div class="col-md-2"></div>
   </div>
 
   <div class="row chart">
-    <div class="col-md-12">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
       <div id="genderVisRadial" class = "chart"></div>
     </div>
+    <div class="col-md-1"></div>
   </div>
 
   <div class="row">
@@ -265,10 +267,6 @@
         </table>
       </div>
     </div>
-
-    </div>
-
-
 
   </div>
 

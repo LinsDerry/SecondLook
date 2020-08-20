@@ -10,16 +10,19 @@ var svgRadial = d3.select("#genderVisRadial").append("svg")
     .attr("class", "chart")
     .attr("transform", "translate(" + marginRadial.left + "," + (marginRadial.top * 1.3) + ")");
 
-// var svgRadial = d3.select("#genderVisRadial").append("svg")
-//     .attr("width", widthRadial + marginRadial.left + marginRadial.right)
-//     .attr("height", heightRadial + marginRadial.top + marginRadial.bottom)
-//     .append("g")
-//     .attr("class", "chart")
-//     .attr("transform", "translate(" + marginRadial.left + "," + (marginRadial.top * 1.3) + ")");
+//Append g element for text
+var gtext = svgRadial.append("g")
+
+gtext.attr("class", "x-axis axes") // Classes set to match the style of pack and concentric charts' labels
+    .attr("transform", "translate(" + (-(marginRadial.left / 2)) + "," + heightRadial + ")")
+    .append("text")
+    .attr("class", "x-axis axes axes-label note")
+    .style("text-anchor", "start")
+    .text("The rays extending beyond the outermost white circle show the frequency that AI recognizes a subject’s gender for a given confidence rating between 1% and 100%.");
 
 // Color scale
 var gradientCol = d3.scaleLinear()
-//Using more than 2 values in domain and range to create segmentation of color gradients
+    //Using more than 2 values in domain and range to create segmentation of color gradients
     .domain([0, 50, 149, 150, 224, 249, 250, 349, 399])
     .range(["#9c9ffc", "#6f1e34", "#fbf3f5", "#fcfcfc", "#fcfcfc", "#fcfcfc", "#f6f8f9", "#223740", "#9c9ffc"]);
 
@@ -185,7 +188,7 @@ function genderVisRadial(fem, mal) {
         .attr("r", outRadius)
         .style("fill", "none")
         .style("stroke", "white")
-        .style("stroke-width", 0.1);
+        .style("stroke-width", 1);
 
     // Update tool-tip display information
     tipG.html(function (d) {

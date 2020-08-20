@@ -25,9 +25,10 @@ body {
   margin-left: 0;
 }
 label.title, form {
-  padding: 8px;
-  margin: 8px;
+  padding: 3px 8px 3px 8px;
+  margin: 3px 8px 3px 8px;
   background: none; /* Remove to match background of image details rectangle */
+  font-size: 10px;
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.06em;
@@ -44,11 +45,11 @@ label.title, form {
   margin: 5px;
   padding: 5px;
 }
-#art-object-details, .axes, .radio, .note, table, label, form {
+#art-object-details, .axes, table {
   font-size: 12px;
 }
 .radialLabel {
-  font-size: 12px;
+  font-size: 14px;
 }
 .title, table, #mosaic-message-0 {
   background: #F8F8F8;
@@ -121,6 +122,7 @@ h3 {
   text-transform: none;
 }
 .note {
+  font-size: 10px;
   font-style: italic;
 }
 .axes text {

@@ -3,16 +3,9 @@ var marginWheel = {top: 5, right: 5, bottom: 5, left: 5};
 var widthWheel = 350 - marginWheel.left - marginWheel.right;
 var heightWheel = 400 - marginWheel.top - marginWheel.bottom;
 
-// var svgWheel = d3.select("#colorVisWheel").append("svg")
-//     .attr("viewBox", "0 0 " + (widthWheel + marginWheel.left + marginWheel.right) + " " +
-//         (heightWheel + marginWheel.top + marginWheel.bottom) + "")
-//     .append("g")
-//     .attr("class", "chart")
-//     .attr("transform", "translate(" + marginWheel.left / 4 + ", 0)");
-
 var svgWheel = d3.select("#colorVisWheel").append("svg")
-    .attr("width", widthWheel + marginWheel.left + marginWheel.right)
-    .attr("height", heightWheel + marginWheel.top + marginWheel.bottom)
+    .attr("viewBox", "0 0 " + (widthWheel + marginWheel.left + marginWheel.right) + " " +
+        (heightWheel + marginWheel.top + marginWheel.bottom) + "")
     .append("g")
     .attr("class", "chart")
     .attr("transform", "translate(" + marginWheel.left / 4 + ", 0)");

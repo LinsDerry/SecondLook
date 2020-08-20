@@ -3,16 +3,10 @@ var marginMosaic = marginPack;
 var widthMosaic = 700 - marginMosaic.left - marginMosaic.right;
 var heightMosaic = 550 - marginMosaic.top - marginMosaic.bottom;
 
-// var svgMosaic = d3.select("#colorVisMosaic").append("svg")
-//     .attr("viewBox", "0 0 " + (widthMosaic + marginMosaic.left + marginMosaic.right) + " " +
-//         (heightMosaic + marginMosaic.top + marginMosaic.bottom) + "")
-//     .append("g")
-//     .attr("class", "chart")
-//     .attr("transform", "translate(" + marginMosaic.left + "," + marginMosaic.top + ")");
-
 var svgMosaic = d3.select("#colorVisMosaic").append("svg")
     .attr("width", widthMosaic + marginMosaic.left + marginMosaic.right)
     .attr("height", heightMosaic + marginMosaic.top + marginMosaic.bottom)
+    .call(responsivefy) //Function defined at bottom of file
     .append("g")
     .attr("class", "chart")
     .attr("transform", "translate(" + marginMosaic.left + "," + marginMosaic.top + ")");
@@ -35,10 +29,6 @@ function colorMosaic(color, data) {
     data = setupData(color, data); // setupData also updates xScaleMos and yScaleMos domains
 
     document.getElementById("colorVisMosaic").style.backgroundColor = color.color;
-
-    /* Call if using ALL colors in collection vs only prominent ones (see makeColors in main.js). Uncomment
-     label with id="mosaic-message-1" in index.html before calling. */
-    // updateHTML(color, data);
 
     createMosaicDefs(data);
     createWheelDefs(data);
@@ -63,8 +53,6 @@ function colorMosaic(color, data) {
     document.getElementById("gender-2").innerHTML =
         "<strong>Gender: </strong>" + data[0].gender.Value.toLowerCase()
         + " (" + Math.floor(data[0].gender.Confidence) + "% confidence)";
-
-
 
 
     var updateRect = svgMosaic.selectAll("rect").data(data);
@@ -95,10 +83,6 @@ function colorMosaic(color, data) {
             document.getElementById("gender-2").innerHTML =
                 "<strong>Gender: </strong>" + d.gender.Value.toLowerCase()
                 + " (" + Math.floor(d.gender.Confidence) + "% confidence)";
-        })
-        .on("mouseout", function () {
-            // svgWheel.selectAll(".arc").remove();
-            // svgWheel.selectAll("circle").remove();
         });
 
     enterRect.merge(updateRect)
@@ -330,4 +314,39 @@ function makeNewColors(currColors) {
         }
     }
     return newColors;
+}
+
+/* The simple viewBox code used to scale all other visualizations was glitchy with colorMosaic viz.
+* This responsivefy function was copied directly from Ben Clinkinbeard at
+* https://codepen.io/bclinkinbeard/pen/gGPvrz?editors=0010 */
+function responsivefy(svg) {
+    // container will be the DOM element the svg is appended to
+    // we then measure the container and find its aspect ratio
+    const container = d3.select(svg.node().parentNode),
+        width = parseInt(svg.style('width'), 10),
+        height = parseInt(svg.style('height'), 10),
+        aspect = width / height;
+
+    // add viewBox attribute and set its value to the initial size
+    // add preserveAspectRatio attribute to specify how to scale
+    // and call resize so that svg resizes on inital page load
+    svg.attr('viewBox', `0 0 ${width} ${height}`)
+        .attr('preserveAspectRatio', 'xMinYMid')
+        .call(resize);
+
+    // add a listener so the chart will be resized when the window resizes
+    // to register multiple listeners for same event type,
+    // you need to add namespace, i.e., 'click.foo'
+    // necessary if you invoke this function for multiple svgs
+    // api docs: https://github.com/mbostock/d3/wiki/Selections#on
+    d3.select(window).on('resize.' + container.attr('id'), resize);
+
+    // this is the code that actually resizes the chart
+    // and will be called on load and in response to window resize
+    // gets the width of the container and proportionally resizes the svg to fit
+    function resize() {
+        const targetWidth = parseInt(container.style('width'));
+        svg.attr('width', targetWidth);
+        svg.attr('height', Math.round(targetWidth / aspect));
+    }
 }

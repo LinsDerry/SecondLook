@@ -10,13 +10,6 @@ var svgConcentric = d3.select("#sentimentVisConcentric").append("svg")
     .attr("class", "chart")
     .attr("transform", "translate(" + marginConcentric.left * 2 + "," + marginConcentric.top + ")");
 
-// var svgConcentric = d3.select("#sentimentVisConcentric").append("svg")
-//     .attr("width", widthConcentric + marginConcentric.left + marginConcentric.right)
-//     .attr("height", heightConcentric + marginConcentric.top + marginConcentric.bottom)
-//     .append("g")
-//     .attr("class", "chart")
-//     .attr("transform", "translate(" + marginConcentric.left * 2 + "," + marginConcentric.top + ")");
-
 //Scales
 var xScaleCon = d3.scalePoint()
     .range([0, widthConcentric - 2.5 * (marginConcentric.left + marginConcentric.right)])

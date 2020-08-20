@@ -166,9 +166,9 @@ function sentimentColorKey() {
     var key = [];
     key["DISGUSTED"] = "#216000";
     key["SAD"] = "#2a3b90";
-    key["CONFUSED"] = "#ffb366"; //"#ffcc99";
+    key["CONFUSED"] = "#9c9ffc"; //"#ffcc99";
     key["ANGRY"] = "#7a2536";
-    key["CALM"] = "#9c9ffc"; //"#AFEEEE";
+    key["CALM"] = "#3abaef"; //"#AFEEEE";
     key["HAPPY"] = "#ff6b00"; //"#fff853";
     key["SURPRISED"] = "#ac128f";
     key["FEAR"] = "#1a1a1a";

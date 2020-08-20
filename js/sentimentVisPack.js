@@ -10,13 +10,6 @@ var svgPack = d3.select("#sentimentVisPack").append("svg")
     .attr("class", "chart")
     .attr("transform", "translate(" + marginPack.left + "," + marginPack.top / 2 + ")");
 
-// var svgPack = d3.select("#sentimentVisPack").append("svg")
-//     .attr("width", widthPack + marginPack.left + marginPack.right)
-//     .attr("height", heightPack + marginPack.top + marginPack.bottom)
-//     .append("g")
-//     .attr("class", "chart")
-//     .attr("transform", "translate(" + marginPack.left + "," + marginPack.top / 2 + ")");
-
 //Append g element for text (assigned same classes as sentimentVisConcentric g x-axis/text elements so style matches)
 svgPack.append("g")
     .attr("class", "axes x-axis")
