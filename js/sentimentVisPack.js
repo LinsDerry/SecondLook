@@ -62,19 +62,7 @@ function sentimentVisPack(data) {
             else {
                 return "white";
             }
-        })
-        .style("opacity", function (d) {
-            return 0.9;
         });
-        // .style("stroke", function (d) {
-        //     if (d.data.name !== "RootNode" && d.data.name !== undefined) {
-        //         return "black";
-        //     }
-        //     else {
-        //         return "white";
-        //     }
-        // })
-        // .style("stroke-width", 0.25);
 
     var newCircles = updateCir.enter()
         .append("circle")
@@ -89,19 +77,8 @@ function sentimentVisPack(data) {
             else {
                 return "white";
             }
-        })
-        .style("opacity", function (d) {
-            return 0.9
         });
-        // .style("stroke", function (d) {
-        //     if (d.data.name !== "RootNode" && d.data.name !== undefined) {
-        //         return "black";
-        //     }
-        //     else {
-        //         return "white";
-        //     }
-        // })
-        // .style("stroke-width", 0.25);
+
 
     newCircles
         .transition()
