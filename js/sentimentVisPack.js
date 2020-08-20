@@ -1,5 +1,5 @@
 // SVG drawing areas
-var marginPack = {top: 15, right: 15, bottom: 15, left: 15};
+var marginPack = {top: 55, right: 55, bottom: 55, left: 55};
 var widthPack = 700 - marginPack.left - marginPack.right;
 var heightPack = 700 - marginPack.top - marginPack.bottom;
 
@@ -53,7 +53,7 @@ function sentimentVisPack(data) {
             return d.y + yAdjust;
         })
         .attr("r",function(d) {
-            return d.r * 1.05;
+            return d.r;
         })
         .style("fill", function (d) {
             if (d.data.name !== "RootNode" && d.data.name !== undefined) {
@@ -90,7 +90,7 @@ function sentimentVisPack(data) {
             return d.y + yAdjust;
         })
         .attr("r",function(d) {
-            return d.r * 1.05;
+            return d.r;
         });
 
     newCircles
