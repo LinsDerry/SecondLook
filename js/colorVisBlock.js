@@ -1,7 +1,7 @@
 // SVG drawing area
 var marginBlock = {top: 5, right: 5, bottom: 5, left: 5};
 var widthBlock = 1150;
-var heightBlock = 200 - marginBlock.top - marginBlock.bottom;
+var heightBlock = 150 - marginBlock.top - marginBlock.bottom;
 
 var svgBlock = d3.select("#colorVisBlock").append("svg")
     .attr("viewBox", "0 0 " + (widthBlock + marginBlock.left + marginBlock.right) + " " +
