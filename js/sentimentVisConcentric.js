@@ -1,5 +1,5 @@
 // SVG drawing area
-var marginConcentric = marginPack;
+var marginConcentric = {top: 35, right: 35, bottom: 15, left: 35};
 var widthConcentric = 1100 - marginConcentric.left - marginConcentric.right;
 var heightConcentric = 500 - marginConcentric.top - marginConcentric.bottom;
 
@@ -103,9 +103,10 @@ function sentimentVisConcentric(data) {
                 return 0.7;
             }
             else {
-                return 0.25;
+                return 0.2;
             }
         });
+
     updateCir.exit().remove();
 
     //Call axes generators

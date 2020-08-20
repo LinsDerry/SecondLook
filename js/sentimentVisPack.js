@@ -1,5 +1,5 @@
 // SVG drawing areas
-var marginPack = {top: 25, right: 35, bottom: 25, left: 35};
+var marginPack = {top: 15, right: 15, bottom: 15, left: 15};
 var widthPack = 700 - marginPack.left - marginPack.right;
 var heightPack = 700 - marginPack.top - marginPack.bottom;
 
@@ -8,7 +8,7 @@ var svgPack = d3.select("#sentimentVisPack").append("svg")
         (heightPack + marginPack.top + marginPack.bottom) + "")
     .append("g")
     .attr("class", "chart")
-    .attr("transform", "translate(" + marginPack.left + "," + marginPack.top / 2 + ")");
+    .attr("transform", "translate(" + marginPack.left + "," + marginPack.top + ")");
 
 //Append g element for text (assigned same classes as sentimentVisConcentric g x-axis/text elements so style matches)
 svgPack.append("g")
@@ -53,7 +53,7 @@ function sentimentVisPack(data) {
             return d.y + yAdjust;
         })
         .attr("r",function(d) {
-            return d.r;
+            return d.r * 1.05;
         })
         .style("fill", function (d) {
             if (d.data.name !== "RootNode" && d.data.name !== undefined) {
@@ -63,15 +63,18 @@ function sentimentVisPack(data) {
                 return "white";
             }
         })
-        .style("stroke", function (d) {
-            if (d.data.name !== "RootNode" && d.data.name !== undefined) {
-                return "black";
-            }
-            else {
-                return "white";
-            }
-        })
-        .style("stroke-width", 0.25);
+        .style("opacity", function (d) {
+            return 0.9;
+        });
+        // .style("stroke", function (d) {
+        //     if (d.data.name !== "RootNode" && d.data.name !== undefined) {
+        //         return "black";
+        //     }
+        //     else {
+        //         return "white";
+        //     }
+        // })
+        // .style("stroke-width", 0.25);
 
     var newCircles = updateCir.enter()
         .append("circle")
@@ -87,14 +90,18 @@ function sentimentVisPack(data) {
                 return "white";
             }
         })
-        .style("stroke", function (d) {
-            if (d.data.name !== "RootNode" && d.data.name !== undefined) {
-                return "black";
-            }
-            else {
-                return "white";
-            }
+        .style("opacity", function (d) {
+            return 0.9
         });
+        // .style("stroke", function (d) {
+        //     if (d.data.name !== "RootNode" && d.data.name !== undefined) {
+        //         return "black";
+        //     }
+        //     else {
+        //         return "white";
+        //     }
+        // })
+        // .style("stroke-width", 0.25);
 
     newCircles
         .transition()
@@ -106,9 +113,8 @@ function sentimentVisPack(data) {
             return d.y + yAdjust;
         })
         .attr("r",function(d) {
-            return d.r;
-        })
-        .style("stroke-width", 0.25);
+            return d.r * 1.05;
+        });
 
     newCircles
         .on("mouseover", function(d) {

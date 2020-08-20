@@ -164,14 +164,14 @@ function getEmotion(annotation) {
  (Using AWS Rekognition's eight emotions used for facial analysis.) */
 function sentimentColorKey() {
     var key = [];
-    key["DISGUSTED"] = "#216000";
+    key["DISGUSTED"] = "#214F4B";
     key["SAD"] = "#2a3b90";
-    key["CONFUSED"] = "#9c9ffc"; //"#ffcc99";
+    key["CONFUSED"] = "#BBA0B2";
     key["ANGRY"] = "#7a2536";
-    key["CALM"] = "#3abaef"; //"#AFEEEE";
-    key["HAPPY"] = "#ff6b00"; //"#fff853";
+    key["CALM"] = "#00cee9";
+    key["HAPPY"] = "#F02D3A";
     key["SURPRISED"] = "#ac128f";
-    key["FEAR"] = "#1a1a1a";
+    key["FEAR"] = "#1D1A31";
 
     return key;
 }

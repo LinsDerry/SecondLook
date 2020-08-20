@@ -7,7 +7,7 @@ body {
   padding: 25px;
   margin: 25px;
 }
-.art-object-details, img, label.title {
+.art-object-details, img {
   padding: 15px;
   margin: 15px;
 }
@@ -24,18 +24,20 @@ body {
   padding-left: 0;
   margin-left: 0;
 }
-label.title, form {
-  padding: 3px 8px 3px 8px;
-  margin: 3px 8px 3px 8px;
+label.title {
+  padding: 3px;
+  margin: 0 15px 8px 15px;
   background: none; /* Remove to match background of image details rectangle */
   font-size: 10px;
   text-transform: uppercase;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.03em;
+}
+.form {
+  margin-left: 4px;
 }
 .radio {
   display: block;
-  /*display: inline;*/
   position: relative;
   cursor: pointer;
   padding: 2px;
@@ -47,9 +49,6 @@ label.title, form {
 }
 #art-object-details, .axes, table {
   font-size: 12px;
-}
-.radialLabel {
-  font-size: 14px;
 }
 .title, table, #mosaic-message-0 {
   background: #F8F8F8;
@@ -67,7 +66,7 @@ img {
   position: center;
 }
 .text-img {
-  max-width: 50%;
+  max-width: 100%;
   height: auto;
   position: center;
   display: block;
@@ -111,7 +110,9 @@ h3 {
   text-align: justify;
   line-height: 1.7;
 }
-
+.radialLabel {
+  font-size: 10px;
+}
 .axes path {
   stroke: #343a40;
 }
@@ -122,7 +123,6 @@ h3 {
   text-transform: none;
 }
 .note {
-  font-size: 10px;
   font-style: italic;
 }
 .axes text {

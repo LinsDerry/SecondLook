@@ -1,6 +1,6 @@
 // SVG drawing areas
-var marginRadial = {top: 65, right: 55, bottom: 45, left: 55};
-var widthRadial = 800 - marginRadial.left - marginRadial.right;
+var marginRadial = {top: 65, right: 65, bottom: 65, left: 65};
+var widthRadial = 700 - marginRadial.left - marginRadial.right;
 var heightRadial = 700 - marginRadial.top - marginRadial.bottom;
 
 var svgRadial = d3.select("#genderVisRadial").append("svg")
@@ -13,11 +13,12 @@ var svgRadial = d3.select("#genderVisRadial").append("svg")
 //Append g element for text
 var gtext = svgRadial.append("g")
 
-gtext.attr("class", "x-axis axes") // Classes set to match the style of pack and concentric charts' labels
-    .attr("transform", "translate(" + (-(marginRadial.left / 2)) + "," + heightRadial + ")")
+gtext.attr("class", "axes") // Classes set to match the style of pack and concentric charts' labels
+    .attr("transform", "translate(" + (-(marginRadial.left / 1.5)) + "," + (heightRadial + marginRadial.bottom / 2) + ")")
     .append("text")
-    .attr("class", "x-axis axes axes-label note")
+    .attr("class", "axes axes-label note")
     .style("text-anchor", "start")
+    .style("font-size", 9)
     .text("The rays extending beyond the outermost white circle show the frequency that AI recognizes a subject’s gender for a given confidence rating between 1% and 100%.");
 
 // Color scale
@@ -263,6 +264,8 @@ function orderSlices(fem, mal) {
     return slices;
 }
 
+/* makeFrequencyMap returns a map with the confidence ratings 1-100 as keys and the value as the recurrence of art objects
+with that gender confidence score. data is either female or male data sets. */
 function makeFrequencyMap(data) {
     var map = [];
 
@@ -284,6 +287,7 @@ function makeFrequencyMap(data) {
     return map;
 }
 
+/* Returns the domain for the normalize scale function */
 function getDomain(slices) {
 
     var domain = [];
@@ -300,8 +304,8 @@ function getDomain(slices) {
 * (starting at 12:00) "Both", "Female", "Neither or Non-Binary", "Male". Each section has 3 pie slices for supporting
 * the textAlign labels. This is for inner doughnut chart. */
 function makeSections() {
-    var sm = "10px";
-    var lg = "14px";
+    var sm = "8px";
+    var lg = "11px";
 
     return [
         {
