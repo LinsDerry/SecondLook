@@ -26,7 +26,7 @@
     <div class="col-md-2"></div>
     <div class="col-md-8">
       <img class="text-img" src="img/haminterior.jpeg"></img>
-      <h2>Second Look: gender and sentiment <em>on view</em> at the museum </h2>
+      <h2>Second Look: gender and sentiment <em>on show</em></h2>
       <h3>
         Not unlike animal forms of intelligence, artificial intelligence relies upon pattern
         recognition. But its understanding of patterns is dependent upon rigid and rigorous categories
@@ -260,6 +260,9 @@
   <script src="js/d3-legend.min.js"></script>
   <script src="js/d3-tip.js"></script>
 
+
+  <!-- Load visualization scripts -->
+  <script src="js/main.js"></script>
   <script src="js/sentimentVisPack.js"></script>
   <script src="js/sentimentVisConcentric.js"></script>
   <script src="js/colorVisWheel.js"></script>
@@ -269,7 +272,15 @@
   <script src="js/genderVisRadial.js"></script>
   <script src="js/sentVisTime.js"></script>
 
-  <script src="js/main.js"></script>
+  <!-- Script for redirecting to mobile site -->
+  <script language="javascript">
+    if(!window.location.search.substring(1) == "full=true") {
+      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) { // detect mobile browser
+        window.location.replace("https://www.linsderry.com/data-visualization-second-look");
+      }
+    }
+  </script>
+
 </body>
 
 </html>

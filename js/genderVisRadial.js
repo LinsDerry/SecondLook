@@ -1,7 +1,7 @@
 // SVG drawing areas
-var marginRadial = {top: 65, right: 65, bottom: 65, left: 65};
-var widthRadial = 700 - marginRadial.left - marginRadial.right;
-var heightRadial = 700 - marginRadial.top - marginRadial.bottom;
+var marginRadial = {top: 35, right: 35, bottom: 35, left: 35};
+var widthRadial = 600 - marginRadial.left - marginRadial.right;
+var heightRadial = 600 - marginRadial.top - marginRadial.bottom;
 
 var svgRadial = d3.select("#genderVisRadial").append("svg")
     .attr("viewBox", "0 0 " + (widthRadial + marginRadial.left + marginRadial.right) + " " +
@@ -18,7 +18,7 @@ gtext.attr("class", "axes") // Classes set to match the style of pack and concen
     .append("text")
     .attr("class", "axes axes-label note")
     .style("text-anchor", "start")
-    .style("font-size", 9)
+    .style("font-size", 8)
     .text("The rays extending beyond the outermost white circle show the frequency that AI recognizes a subject’s gender for a given confidence rating between 1% and 100%.");
 
 // Color scale
