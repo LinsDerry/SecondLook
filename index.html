@@ -12,10 +12,8 @@
 
   <!-- Script for redirecting to mobile site -->
   <script language="javascript">
-    if(!window.location.search.substring(1) == "full=true") {
-      if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) { // detect mobile browser
-        window.location.replace("https://www.linsderry.com/data-visualization-second-look");
-      }
+    if (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/Android/i)) {
+      location.replace("https://www.linsderry.com/data-visualization-second-look");
     }
   </script>
 </head>
