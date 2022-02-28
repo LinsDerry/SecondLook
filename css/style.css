@@ -32,7 +32,7 @@ label.title {
   padding: 3px;
   margin: 0 15px 8px 15px;
   background: none; /* Remove to match background of image details rectangle */
-  font-size: 20px; /* 10px web */
+  font-size: 15px; /* 10px web */
   text-transform: uppercase;
   font-weight: 600;
   letter-spacing: 0.03em;
@@ -101,9 +101,9 @@ h1, h2, h3, .radialLabel {
 
 h1, h2 {
   margin: 35px;
-  margin-bottom: 10px;
+  margin-bottom: 10px; 
   padding: 35px 15px 10px 15px;
-  font-size: 66px; /* 33px web */
+  font-size: 33px; /* 33px web */
 }
 h1 {
   color: #F02D3A;
