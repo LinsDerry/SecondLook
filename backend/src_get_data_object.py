@@ -1,4 +1,4 @@
-# This script, src_get_data_object.py, was created by Satvik Shukla and adapted by Lins Derry for metaLAB project
+# This script, src_get_data_object.py, was createdpython by Satvik Shukla and adapted by Lins Derry for metaLAB project
 # Curatorial A(i)gents. The ham_api_key has been removed for security. To retrieve your own key, please go to:
 #
 # https://www.harvardartmuseums.org/collections/api
