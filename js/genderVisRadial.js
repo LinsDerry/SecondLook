@@ -1,14 +1,18 @@
 // SVG drawing areas
-var marginRadial = {top: 35, right: 35, bottom: 35, left: 35};
-var widthRadial = 600 - marginRadial.left - marginRadial.right;
-var heightRadial = 600 - marginRadial.top - marginRadial.bottom;
+// var marginRadial = {top: 35, right: 35, bottom: 35, left: 35};
+// var widthRadial = 600 - marginRadial.left - marginRadial.right;
+// var heightRadial = 600 - marginRadial.top - marginRadial.bottom;
+
+var marginRadial = {top: 75, right: 30, bottom: 5, left: 30};
+var widthRadial = 700 - marginRadial.left - marginRadial.right;
+var heightRadial = 575 - marginRadial.top - marginRadial.bottom;
 
 var svgRadial = d3.select("#genderVisRadial").append("svg")
     .attr("viewBox", "0 0 " + (widthRadial + marginRadial.left + marginRadial.right) + " " +
         (heightRadial + marginRadial.top + marginRadial.bottom) + "")
     .append("g")
     .attr("class", "chart")
-    .attr("transform", "translate(" + marginRadial.left + "," + (marginRadial.top * 1.3) + ")");
+    .attr("transform", "translate(" + marginRadial.left + "," + marginRadial.top + ")"); //(marginRadial.top * 1.3) for web
 
 //Append g element for text
 var gtext = svgRadial.append("g")
@@ -19,7 +23,7 @@ gtext.attr("class", "axes") // Classes set to match the style of pack and concen
     .attr("class", "axes axes-label note")
     .style("text-anchor", "start")
     .style("font-size", 8)
-    .text("The rays extending beyond the outermost white circle show the frequency that AI recognizes a subject’s gender for a given confidence rating between 1% and 100%.");
+    // .text("The rays extending beyond the outermost white circle show the frequency that AI recognizes a subject’s gender for a given confidence rating between 1 and 100.");
 
 // Color scale
 var gradientCol = d3.scaleLinear()

@@ -1,7 +1,11 @@
 // SVG drawing areas
-var marginPack = {top: 55, right: 55, bottom: 55, left: 55};
+// var marginPack = {top: 55, right: 55, bottom: 55, left: 55}; //for web
+// var widthPack = 700 - marginPack.left - marginPack.right;
+// var heightPack = 700 - marginPack.top - marginPack.bottom;
+
+var marginPack = {top: 15, right: 55, bottom: 0, left: 55}; //for Lightbox
 var widthPack = 700 - marginPack.left - marginPack.right;
-var heightPack = 700 - marginPack.top - marginPack.bottom;
+var heightPack = 500 - marginPack.top - marginPack.bottom;
 
 var svgPack = d3.select("#sentimentVisPack").append("svg")
     .attr("viewBox", "0 0 " + (widthPack + marginPack.left + marginPack.right) + " " +
@@ -17,7 +21,7 @@ svgPack.append("g")
     .append("text")
     .attr("class", "axes-label note")
     .style("text-anchor", "start")
-    .text("Each circle represents a painting; circle sizes are relative to AI's confidence that the painting portrays the given sentiment.");
+    // .text("Each circle represents a painting. Circle sizes are relative to AI's confidence that the painting portrays the given sentiment.")
 
 function sentimentVisPack(data) {
 

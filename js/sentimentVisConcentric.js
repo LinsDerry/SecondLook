@@ -1,7 +1,7 @@
 // SVG drawing area
 var marginConcentric = {top: 35, right: 35, bottom: 15, left: 35};
 var widthConcentric = 1100 - marginConcentric.left - marginConcentric.right;
-var heightConcentric = 500 - marginConcentric.top - marginConcentric.bottom;
+var heightConcentric = 450 - marginConcentric.top - marginConcentric.bottom; // 500 for web
 
 var svgConcentric = d3.select("#sentimentVisConcentric").append("svg")
     .attr("viewBox", "0 0 " + (widthConcentric + marginConcentric.left + marginConcentric.right) + " " +
@@ -43,7 +43,7 @@ gx.append("text")
     .attr("class", "axes-label note")
     .style("text-anchor", "start")
     .attr("transform", "translate(0, 100)")
-    .text("Each circle represents a painting; circle sizes are relative to AI's confidence that the painting portrays the given sentiment.");
+    // .text("Each circle represents a painting; circle sizes are relative to AI's confidence that the painting portrays the given sentiment.");
 
 var gy = svgConcentric.append("g")
     .attr("class", "y-axis axes")
