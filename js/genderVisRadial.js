@@ -31,14 +31,6 @@ var gradientCol = d3.scaleLinear()
     .domain([0, 50, 149, 150, 224, 249, 250, 349, 399])
     .range(["#9c9ffc", "#6f1e34", "#fbf3f5", "#fcfcfc", "#fcfcfc", "#fcfcfc", "#f6f8f9", "#223740", "#9c9ffc"]);
 
-// lavender: "#9c9ffc"
-// dark pink: "#6f1e34"
-// light pink: "#fbf3f5"
-// light grey: "#fcfcfc"
-// light blue: "#f6f8f9"
-// dark blue: "#223740"
-// lavender: "#9c9ffc"
-
 //Normalization scale
 var normalize = d3.scaleLinear()
     .range([0, 1]);
@@ -96,7 +88,7 @@ function genderVisRadial(fem, mal) {
     var pieData = outerPie(slices);
     var labelData = innerPie(sections);
 
-    svgRadial.selectAll("g.arc").remove(); //Can delete if no filters are used.
+    svgRadial.selectAll("g.arc").remove(); //Can delete if no filters are used
 
     // Draw outer doughnut
     var arcs = svgRadial.selectAll("g.arc")

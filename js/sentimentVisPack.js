@@ -1,11 +1,11 @@
 // SVG drawing areas
-// var marginPack = {top: 55, right: 55, bottom: 55, left: 55}; //for web
-// var widthPack = 700 - marginPack.left - marginPack.right;
-// var heightPack = 700 - marginPack.top - marginPack.bottom;
-
-var marginPack = {top: 15, right: 55, bottom: 0, left: 55}; //for Lightbox
+var marginPack = {top: 55, right: 55, bottom: 55, left: 55}; //for web
 var widthPack = 700 - marginPack.left - marginPack.right;
-var heightPack = 500 - marginPack.top - marginPack.bottom;
+var heightPack = 700 - marginPack.top - marginPack.bottom;
+
+// var marginPack = {top: 15, right: 55, bottom: 15, left: 55}; //for Lightbox
+// var widthPack = 500 - marginPack.left - marginPack.right;
+// var heightPack = 500 - marginPack.top - marginPack.bottom;
 
 var svgPack = d3.select("#sentimentVisPack").append("svg")
     .attr("viewBox", "0 0 " + (widthPack + marginPack.left + marginPack.right) + " " +
@@ -38,8 +38,8 @@ function sentimentVisPack(data) {
 
     var nodes = pack(root).descendants();
 
-    var xAdjust = 0;
-    var yAdjust = -25;
+    var xAdjust = 50; //0 for web
+    var yAdjust = -50; //-25 for web
 
     var updateCir = svgPack
         .selectAll(".cir")

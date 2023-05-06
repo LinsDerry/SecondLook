@@ -1,7 +1,7 @@
 // SVG drawing area
 var marginConcentric = {top: 35, right: 35, bottom: 15, left: 35};
 var widthConcentric = 1100 - marginConcentric.left - marginConcentric.right;
-var heightConcentric = 450 - marginConcentric.top - marginConcentric.bottom; // 500 for web
+var heightConcentric = 500 - marginConcentric.top - marginConcentric.bottom; // 500 for web
 
 var svgConcentric = d3.select("#sentimentVisConcentric").append("svg")
     .attr("viewBox", "0 0 " + (widthConcentric + marginConcentric.left + marginConcentric.right) + " " +
